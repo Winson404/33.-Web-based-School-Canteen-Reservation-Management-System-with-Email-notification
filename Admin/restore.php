@@ -1,5 +1,5 @@
 <?php 
-include 'navbar.php';
+require_once 'sidebar.php';
 
 $connection = mysqli_connect("localhost","root","","my_template");
 $filename = date("Y-m-d").".sql";
@@ -57,5 +57,5 @@ fclose($handle);
   </div>
 
 
-<?php include '../Includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>
 

@@ -1,7 +1,7 @@
 <?php 
 
 	session_start();
-	$conn = mysqli_connect("localhost","root","","canteen_reservation");
+	$conn = mysqli_connect("localhost", "root", "", "my_template");
 	if(!$conn) {
 		die("Connection failed: " . mysqli_connect_error());
 	}

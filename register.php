@@ -1,5 +1,5 @@
-<title>School Canteen Reservation System | Register</title>
-<?php include 'navbar.php';?>
+<title>Web-based School Canteen Reservation Management System | Register</title>
+<?php require_once 'header.php';?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" >
@@ -250,9 +250,20 @@
                     </div>
                     <!-- END ROW -->
                 </div>
+
                 <div class="card-footer">
-                  <div class="float-right">
-                    <button type="submit" class="btn bg-primary" name="create_user" id="submit_button"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="icheck-primary">
+                        <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                        <label for="agreeTerms">
+                         I agree to the <a href="#">terms</a>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <button type="submit" class="btn btn-primary float-right" ame="create_user" id="submit_button"><i class="fa-solid fa-floppy-disk"></i> Register</button>
+                    </div>
                   </div>
                 </div>
             </div>

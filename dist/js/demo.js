@@ -10,13 +10,13 @@
 (function ($) {
   'use strict'
 
-  // setTimeout(function () {
-  //   if (window.___browserSync___ === undefined && Number(localStorage.getItem('AdminLTE:Demo:MessageShowed')) < Date.now()) {
-  //     localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (15 * 60 * 1000))
-  //     // eslint-disable-next-line no-alert
-  //     alert('You load AdminLTE\'s "demo.js", \nthis file is only created for testing purposes!')
-  //   }
-  // }, 1000)
+  setTimeout(function () {
+    if (window.___browserSync___ === undefined && Number(localStorage.getItem('AdminLTE:Demo:MessageShowed')) < Date.now()) {
+      localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (15 * 60 * 1000))
+      // eslint-disable-next-line no-alert
+      alert('You load AdminLTE\'s "demo.js", \nthis file is only created for testing purposes!')
+    }
+  }, 1000)
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
@@ -504,7 +504,7 @@
   })
   var navbar_all_colors = navbar_dark_skins.concat(navbar_light_skins)
   var $navbar_variants_colors = createSkinBlock(navbar_all_colors, function () {
-    var color = $(this).find('option:selected').attr('class').replace('bg-', 'navbar-')
+    var color = $(this).find('option:selected').attr('class')
     var $main_header = $('.main-header')
     $main_header.removeClass('navbar-dark').removeClass('navbar-light')
     navbar_all_colors.forEach(function (color) {
@@ -652,7 +652,7 @@
   })
 
   var $brand_variants = createSkinBlock(logo_skins, function () {
-    var color = $(this).find('option:selected').attr('class').replace('bg-', 'navbar-')
+    var color = $(this).find('option:selected').attr('class')
     var $logo = $('.brand-link')
 
     if (color === 'navbar-light' || color === 'navbar-white') {

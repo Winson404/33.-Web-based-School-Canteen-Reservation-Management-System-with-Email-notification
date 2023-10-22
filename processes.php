@@ -97,10 +97,9 @@
 
 	// SEND CODE - SENDCODE.PHP
 	if(isset($_POST['sendcode'])) {
-
-	    $recipientEmail = $_POST['email'];
-	    $user_Id        = $_POST['user_Id'];
-	    $key            = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+	    $email    = $_POST['email'];
+	    $user_Id  = $_POST['user_Id'];
+	    $key      = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
 
 	    $insert_code = mysqli_query($conn, "UPDATE users SET verification_code='$key' WHERE email='$email' AND user_Id='$user_Id'");
 	    if($insert_code) {
@@ -110,12 +109,11 @@
 	      <p>You can change your password by just clicking it <a href="http://localhost/PROJECT%200.%20My%20NEW%20Template%20System/changepassword.php?user_Id='.$user_Id.'">here!</a></p> 
 	      <p><b>NOTE:</b> This is a system generated email. Please do not reply.</p> ';
 
-    	  sendEmail($subject, $message, $recipientEmail, "verifycode.php?user_Id=".$user_Id."&&email=".$recipientEmail);    
+    	  sendEmail($subject, $message, $email, "verifycode.php?user_Id=".$user_Id."&&email=".$email);    
 		} else {
 			displayErrorMessage("Something went wrong while generating verification code through email.", "sendcode.php?user_Id=".$user_Id);
 		} 
 	}
-
 
 
 

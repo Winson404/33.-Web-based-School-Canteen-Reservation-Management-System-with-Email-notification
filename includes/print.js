@@ -1,24 +1,24 @@
 function print() {
-	printJS({
+  printJS({
     printable: 'printElement',
     type: 'html',
     targetStyles: ['*']
  })
 }
 
-@media print {
-      hp {
-        color: rgba(0, 0, 0, 0);
-        text-shadow: 0 0 0 #ccc;
-      }
+// @media print {
+//       hp {
+//         color: rgba(0, 0, 0, 0);
+//         text-shadow: 0 0 0 #ccc;
+//       }
 
-      @media print and (-webkit-min-device-pixel-ratio:0) {
-        hp {
-          color: #ccc;
-          -webkit-print-color-adjust: exact;
-        }
-      }
-   }
+//       @media print and (-webkit-min-device-pixel-ratio:0) {
+//         hp {
+//           color: #ccc;
+//           -webkit-print-color-adjust: exact;
+//         }
+//       }
+//    }
 document.getElementById('printButton').addEventListener ("click", print)
 
 // Print.js

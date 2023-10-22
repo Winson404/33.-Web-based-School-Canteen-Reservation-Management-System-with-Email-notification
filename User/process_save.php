@@ -1,7 +1,7 @@
 <?php 
-	include '../config.php';
+	require_once '../config.php';
 	// include('../phpqrcode/qrlib.php');
-	include '../includes/function_create.php';
+	require_once '../includes/function_create.php';
 	
 	
 	// CONTACT EMAIL MESSAGING - CONTACT-US.PHP

@@ -1,6 +1,6 @@
 <?php 
-	include '../config.php';
-	include '../includes/function_update.php';
+	require_once '../config.php';
+	require_once '../includes/function_update.php';
 
 
 	// UPDATE ADMIN INFO - PROFILE.PHP
