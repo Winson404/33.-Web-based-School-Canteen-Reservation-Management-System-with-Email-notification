@@ -1,6 +1,7 @@
 <title>Web-based School Canteen Reservation Management System | Administrator records</title>
 <?php
-require_once 'sidebar.php';
+  require_once 'sidebar.php';
+  require_once '../classes/authentication.php';
 ?>
 <div class="content-wrapper">
   <div class="content-header">
@@ -38,10 +39,12 @@ require_once 'sidebar.php';
                   </tr>
                 </thead>
                 <tbody id="users_data">
-                  <?php
-                  $i = 1;
-                  $sql = mysqli_query($conn, "SELECT * FROM log_history JOIN users ON log_history.user_Id=users.user_Id ORDER BY log_Id DESC");
-                  while ($row = mysqli_fetch_array($sql)) {
+                   <?php 
+                    $i = 1;
+                    $log = new LogHistory();
+                    $log_history = $log->display_logs();
+                    foreach ($log_history as $row) {
+
                   ?>
                   <tr>
                     <td><?php echo $i++; ?></td>

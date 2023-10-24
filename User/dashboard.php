@@ -1,5 +1,8 @@
 <title>Web-based School Canteen Reservation Management System | Dashboard</title>
-<?php require_once 'sidebar.php'; ?>
+<?php
+  require_once 'sidebar.php';
+  require '../classes/user.php';
+?>
   
 <div class="content-wrapper">
   <section class="content-header">
@@ -19,15 +22,16 @@
   </section>
   <section class="content">
     <div class="container-fluid">
-      <div class="row d-flex justify-content-center">
+      <div class="row">
+        
         <div class="col-lg-3 col-6">
           <div class="small-box bg-info">
             <div class="inner">
               <?php
-              $users = mysqli_query($conn, "SELECT user_Id from users WHERE user_type='Admin'");
-              $row_users = mysqli_num_rows($users);
+                $admin = new User();
+                $count_admin = $admin->count_users('Admin');
               ?>
-              <h3><?php echo $row_users; ?></h3>
+              <h3><?= $count_admin; ?></h3>
               <p>Administrators</p>
             </div>
             <div class="icon">
@@ -40,10 +44,10 @@
           <div class="small-box bg-success">
             <div class="inner">
               <?php
-              $users = mysqli_query($conn, "SELECT user_Id from users WHERE user_type='User'");
-              $row_users = mysqli_num_rows($users);
+                $user = new User();
+                $count_user = $user->count_users('User');
               ?>
-              <h3><?php echo $row_users; ?></h3>
+              <h3><?= $count_user; ?></h3>
               <p>Registered users</p>
             </div>
             <div class="icon">
@@ -52,6 +56,7 @@
             <a href="users.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
+        
       </div>
     </div>
   </section>

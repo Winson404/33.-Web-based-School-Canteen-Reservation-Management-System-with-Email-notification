@@ -1,6 +1,7 @@
 <title>Web-based School Canteen Reservation Management System | Manage User</title>
 <?php 
     require_once 'sidebar.php'; 
+    require_once '../classes/user.php'; 
     if(isset($_GET['page'])) {
       $page = $_GET['page'];
 ?>
@@ -25,7 +26,7 @@
   <section class="content">
     <div class="row">
       <div class="col-md-12">
-        <form action="process_save.php" method="POST" enctype="multipart/form-data">
+        <form action="../forms/user_create.php" method="POST" enctype="multipart/form-data">
           <div class="card card-primary card-outline">
             <div class="card-header">
               <h3 class="card-title">Fill-in the required fields below</h3>
@@ -266,8 +267,8 @@
   </section>
   <?php } else { 
     $user_Id = $page;
-    $fetch = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$user_Id'");
-    $row = mysqli_fetch_array($fetch);
+    $user = new User();
+    $row = $user->get_user($user_Id);
   ?>
   <section class="content-header">
     <div class="container-fluid">
@@ -287,7 +288,7 @@
   <section class="content">
     <div class="row">
       <div class="col-md-12">
-        <form action="process_update.php" method="POST" enctype="multipart/form-data">
+        <form action="../forms/user_update.php" method="POST" enctype="multipart/form-data">
           <input type="hidden" class="form-control" name="user_Id" required value="<?php echo $row['user_Id']; ?>">
           <div class="card card-primary card-outline">
             <div class="card-header">

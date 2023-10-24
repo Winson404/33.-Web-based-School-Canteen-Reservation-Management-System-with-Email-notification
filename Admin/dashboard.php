@@ -1,6 +1,7 @@
 <title>Web-based School Canteen Reservation Management System | Dashboard</title>
 <?php
-require_once 'sidebar.php';
+  require_once 'sidebar.php';
+  require '../classes/user.php';
 ?>
 <div class="content-wrapper">
   <div class="content-header">
@@ -12,7 +13,7 @@ require_once 'sidebar.php';
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </div>
       </div>
@@ -21,14 +22,15 @@ require_once 'sidebar.php';
   <section class="content">
     <div class="container-fluid">
       <div class="row">
+        
         <div class="col-lg-3 col-6">
           <div class="small-box bg-info">
             <div class="inner">
               <?php
-              $users = mysqli_query($conn, "SELECT user_Id from users WHERE user_type='Admin'");
-              $row_users = mysqli_num_rows($users);
+                $admin = new User();
+                $count_admin = $admin->count_users('Admin');
               ?>
-              <h3><?php echo $row_users; ?></h3>
+              <h3><?= $count_admin; ?></h3>
               <p>Administrators</p>
             </div>
             <div class="icon">
@@ -41,10 +43,10 @@ require_once 'sidebar.php';
           <div class="small-box bg-success">
             <div class="inner">
               <?php
-              $users = mysqli_query($conn, "SELECT user_Id from users WHERE user_type='User'");
-              $row_users = mysqli_num_rows($users);
+                $user = new User();
+                $count_user = $user->count_users('User');
               ?>
-              <h3><?php echo $row_users; ?></h3>
+              <h3><?= $count_user; ?></h3>
               <p>Registered users</p>
             </div>
             <div class="icon">
@@ -53,30 +55,7 @@ require_once 'sidebar.php';
             <a href="users.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div class="col-lg-3 col-6">
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3>44</h3>
-              <p>User Registrations</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-6">
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h3>65</h3>
-              <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
+        
       </div>
     </div>
   </section>

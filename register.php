@@ -10,7 +10,7 @@
         <div class="row d-flex justify-content-center">
 
           <div class="col-lg-10 mt-5">
-            <form action="processes.php" method="POST" enctype="multipart/form-data">
+            <form action="forms/user_create.php" method="POST" enctype="multipart/form-data">
             <div class="card card-outline card-primary">
               <div class="card-header text-center">
                 <a href="#" class="h1"><b>Registration</b></a>
@@ -262,7 +262,7 @@
                       </div>
                     </div>
                     <div class="col-4">
-                      <button type="submit" class="btn btn-primary float-right" ame="create_user" id="submit_button"><i class="fa-solid fa-floppy-disk"></i> Register</button>
+                      <button type="submit" class="btn btn-primary float-right" name="register_user" id="submit_button"><i class="fa-solid fa-floppy-disk"></i> Register</button>
                     </div>
                   </div>
                 </div>

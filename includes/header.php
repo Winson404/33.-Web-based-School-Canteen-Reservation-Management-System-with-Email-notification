@@ -5,33 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Web-based School Canteen Reservation Management System</title>
     <!---FAVICON ICON FOR WEBSITE--->
-    <link rel="shortcut icon" type="image/png" href="../dist/img/AdminLTELogo.png">
+    <link rel="shortcut icon" type="image/png" href="../assets/dist/img/AdminLTELogo.png">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <script src="../plugins/fontawesome-free/js/font-awesome-ni-erwin.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
+    <script src="../assets/plugins/fontawesome-free/js/font-awesome-ni-erwin.js" crossorigin="anonymous"></script>
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
-    <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="../assets/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
     <!-- Select2 -->
-    <link rel="stylesheet" href="../plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <style>
       /*body {
         font-family: 'Roboto', sans-serif;
@@ -62,9 +62,7 @@
   <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
     <div class="wrapper">
 
-      <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-      </div>
+      
 
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- <nav class="main-header navbar navbar-expand navbar-dark"> -->
@@ -153,18 +151,19 @@
           </li> -->
           <!-- Notifications Dropdown Menu -->
           <?php
-          $get = mysqli_query($conn, "SELECT * FROM announcement WHERE actDate >= '$date_today'");
-          $count = mysqli_num_rows($get);
-          // LIMIT NUMBER OF CHARACTERS
-          function custom_echo($x, $length)
-          {
-          if(strlen($x)<=$length) {
-          echo $x;
-          } else {
-          $y=substr($x,0,$length) . '...';
-          echo $y;
-          }
-          }
+            $announcementManager = new Announcement();
+            $announcementData = $announcementManager->count_announcement();
+            $announcements = $announcementData['announcements'];
+            $count = $announcementData['count'];
+             // LIMIT NUMBER OF CHARACTERS
+             function custom_echo($x, $length) {
+               if(strlen($x)<=$length) {
+                 echo $x;
+               } else {
+                 $y=substr($x,0,$length) . '...';
+                 echo $y;
+               }
+             }
           ?>
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -181,37 +180,37 @@
               <div class="dropdown-divider"></div>
               
               <?php
-              if(mysqli_num_rows($get) > 0) {
-              while ($r_count = mysqli_fetch_array($get)) {
+                if($count >= 1) {
+                foreach ($announcements as $announcement) {
               ?>
               <a href="#" class="dropdown-item">
-                <i class="fa-solid fa-circle-info mr-2"></i> <?php echo custom_echo($r_count['actName'], 15); ?>
-                <span class="float-right text-muted text-sm"><?php echo $r_count['actDate']; ?></span>
+                <i class="fa-solid fa-circle-info mr-2"></i> <?php echo custom_echo($announcement['actName'], 15); ?>
+                <span class="float-right text-muted text-sm"><?php echo $announcement['actDate']; ?></span>
               </a>
               <div class="dropdown-divider"></div>
               <?php
-              }
-              }
+                }
+                }
               ?>
-              <?php if(mysqli_num_rows($get) == 1) : ?>
+              <?php if($count == 1) : ?>
               <a type="button" data-toggle="modal" data-target="#reminder" class="dropdown-item dropdown-footer">See Announcement</a>
-              <?php elseif(mysqli_num_rows($get) > 1): ?>
+              <?php else: ?>
               <a type="button" data-toggle="modal" data-target="#reminder" class="dropdown-item dropdown-footer">See All Announcement</a>
               <?php endif; ?>
             </div>
           </li>
           <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-              <!-- <img src="../images-users/<?php echo $row['image']; ?>" alt="User Image" class="mr-3 img-circle" height="50" width="50"> -->
-              <img src="../images-users/<?php echo $row['image']; ?>" class="user-image img-circle elevation-2" alt="User Image">
-              <span class="d-none d-md-inline"><?php echo ' '.$row['firstname'].' '.$row['lastname'].' '; ?></span>
+              <!-- <img src="../images-users/<?php //echo $row['image']; ?>" alt="User Image" class="mr-3 img-circle" height="50" width="50"> -->
+              <img src="../assets/images-users/<?php echo $row['image']; ?>" class="user-image img-circle elevation-2" alt="User Image">
+              <span class="d-none d-md-inline"><?= $row['firstname'].' '.$row['lastname'] ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <!-- User image -->
               <li class="user-header bg-primary">
-                <img src="../images-users/<?php echo $row['image']; ?>" class="img-circle elevation-2" alt="User Image">
+                <img src="../assets/images-users/<?php echo $row['image']; ?>" class="img-circle elevation-2" alt="User Image">
                 <p>
-                  <?php echo ' '.$row['firstname'].' '.$row['lastname'].' '; ?>
+                  <?= $row['firstname'].' '.$row['lastname'] ?>
                   <small><?php echo $row['user_type']; ?></small>
                 </p>
               </li>

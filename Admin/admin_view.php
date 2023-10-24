@@ -1,10 +1,14 @@
 <title>Web-based School Canteen Reservation Management System | Administrator info</title>
 <?php 
     require_once 'sidebar.php'; 
+    require_once '../classes/user.php'; 
     if(isset($_GET['user_Id'])) {
     $user_Id = $_GET['user_Id'];
-    $fetch = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$user_Id'");
-    $row = mysqli_fetch_array($fetch);
+
+    $user = new User();
+    $row = $user->get_user($user_Id);
+
+    
 ?>
 
 <div class="content-wrapper">
@@ -26,7 +30,7 @@
   <section class="content">
     <div class="row">
       <div class="col-md-12">
-        <div class="card card-primary">
+        <div class="card card-primary card-outline">
           <div class="card-header">
             <h3 class="card-title">You are currently viewing the administrator information</h3>
             <div class="card-tools mt-2">
@@ -95,7 +99,7 @@
               </div>
               <div class="col-lg-3 col-md-6 col-12 text-dark">
                 <div class=" d-flex justify-content-center bg-dark d-block m-auto" style="max-height: 120px; min-height: 120px; width: 120px; border: 3px solid darkgray;">
-                  <img src="../images-users/<?php echo $row['image']; ?>" alt="" class="img-fluid d-block m-auto">
+                  <img src="../assets/images-users/<?php echo $row['image']; ?>" alt="" class="img-fluid d-block m-auto">
                 </div>
                 <p class="text-center text-sm text-muted">Resident photo</p>
               </div>  

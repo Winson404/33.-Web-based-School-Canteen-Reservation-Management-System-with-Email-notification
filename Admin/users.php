@@ -1,6 +1,7 @@
 <title>Web-based School Canteen Reservation Management System | User records</title>
-<?php
-require_once 'sidebar.php';
+<?php 
+    require_once 'sidebar.php'; 
+    require '../classes/user.php';
 ?>
 <div class="content-wrapper">
   <div class="content-header">
@@ -45,13 +46,14 @@ require_once 'sidebar.php';
                 </thead>
                 <tbody id="users_data">
                   <?php
-                  $sql = mysqli_query($conn, "SELECT * FROM users WHERE user_type = 'User' ");
-                  while ($row = mysqli_fetch_array($sql)) {
+                    $user = new User();
+                    $admin = $user->display_user('User');
+                    foreach ($admin as $row) {
                   ?>
                   <tr>
                     <td>
                       <a data-toggle="modal" data-target="#viewphoto<?php echo $row['user_Id']; ?>">
-                        <img src="../images-users/<?php echo $row['image']; ?>" alt="" width="25" height="25" class="img-circle d-block m-auto">
+                        <img src="../assets/images-users/<?php echo $row['image']; ?>" alt="" width="25" height="25" class="img-circle d-block m-auto">
                       </a href="">
                     </td>
                     <td><?php echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></td>
@@ -63,7 +65,7 @@ require_once 'sidebar.php';
                       <a class="btn btn-primary btn-sm" href="users_view.php?user_Id=<?php echo $row['user_Id']; ?>"><i class="fas fa-folder"></i> View</a>
                       <a class="btn btn-info btn-sm" href="users_mgmt.php?page=<?php echo $row['user_Id']; ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
                       <button type="button" class="btn bg-danger btn-sm" data-toggle="modal" data-target="#delete<?php echo $row['user_Id']; ?>"><i class="fas fa-trash"></i> Delete</button>
-                      <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#password<?php echo $row['user_Id']; ?>"><i class="fa-solid fa-lock"></i> Security</button>
+                      <!-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#password<?php //echo $row['user_Id']; ?>"><i class="fa-solid fa-lock"></i> Security</button> -->
                     </td>
                   </tr>
                   <?php include 'users_delete.php'; } ?>

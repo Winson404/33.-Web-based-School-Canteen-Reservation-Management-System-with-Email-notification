@@ -6,12 +6,12 @@
       <div class="card-header text-center">
         <!-- <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a> -->
         <a href="login.php" class="h1">
-          <img src="dist/img/AdminLTELogo.png" alt="logo" class="img-fluid shadow-sm img-circle">
+          <img src="assets/dist/img/AdminLTELogo.png" alt="logo" class="img-fluid shadow-sm img-circle">
         </a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <form action="processes.php" method="post">
+        <form action="forms/login_processes.php" method="post">
           <div class="input-group">
             <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email"  onkeydown="validation()" onkeyup="validation()" >
             <div class="input-group-append">

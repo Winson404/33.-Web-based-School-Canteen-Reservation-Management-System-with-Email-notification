@@ -26,9 +26,9 @@ require_once 'sidebar.php';
             <div class="card-body box-profile">
               <div class="text-center">
                 <?php if($row['image'] == ""): ?>
-                <img src="../dist/img/avatar.png" alt="User Avatar" class="img-size-50 img-circle">
+                <img src="../assets/dist/img/avatar.png" alt="User Avatar" class="img-size-50 img-circle">
                 <?php else: ?>
-                <img class="profile-user-img img-fluid img-circle"src="../images-users/<?php echo $row['image']; ?>"alt="User profile picture"  style="height: 90px; width: 90px; border-radius: 50%;">
+                <img class="profile-user-img img-fluid img-circle"src="../assets/images-users/<?php echo $row['image']; ?>"alt="User profile picture"  style="height: 90px; width: 90px; border-radius: 50%;">
                 <?php endif; ?>
                 
               </div>
@@ -152,7 +152,7 @@ require_once 'sidebar.php';
                     </div>
                   </div>
                   <div class="tab-pane" id="updateprofile">
-                    <form action="process_update.php" method="POST">
+                    <form action="../forms/user_update.php" method="POST">
                       <input type="hidden" class="form-control" value="<?php echo $row['user_Id']; ?>" name="user_Id">
                       <div class="form-group row">
                         <a  class="col-sm-12 text-primary text-bold">Basic information</a>
@@ -332,6 +332,14 @@ require_once 'sidebar.php';
                         <label for="Contact number" class="col-sm-2 col-form-label">Province</label>
                         <div class="col-sm-10">
                           <div class="input-group">
+                            <input type="text" class="form-control"  placeholder="Region" name="province" required value="<?php echo $row['province']; ?>">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="Contact number" class="col-sm-2 col-form-label">Region</label>
+                        <div class="col-sm-10">
+                          <div class="input-group">
                             <input type="text" class="form-control"  placeholder="Region" name="region" required value="<?php echo $row['region']; ?>">
                           </div>
                         </div>
@@ -384,7 +392,7 @@ require_once 'sidebar.php';
                     </form>
                   </div>
                   <div class="tab-pane" id="profileupdate">
-                    <form action="process_update.php" method="POST" enctype="multipart/form-data">
+                    <form action="../forms/user_update.php" method="POST" enctype="multipart/form-data">
                       <input type="hidden" class="form-control" value="<?php echo $row['user_Id']; ?>" name="user_Id">
                       <div class="row d-flex justify-content-center">
                         <!-- LOAD IMAGE PREVIEW -->
@@ -410,7 +418,7 @@ require_once 'sidebar.php';
                         </div>
                       </div>
                       <div class="ml-3">
-                        <button type="submit" class="ml-5 btn bg-gradient-primary" name="update_profile_admin">Submit</button>
+                        <button type="submit" class="ml-5 btn bg-gradient-primary" name="update_image_admin">Submit</button>
                       </div>
                     </form>
                   </div>

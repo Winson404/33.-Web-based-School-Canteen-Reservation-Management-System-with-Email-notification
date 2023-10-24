@@ -1,6 +1,7 @@
 <title>Web-based School Canteen Reservation Management System | Announcement records</title>
 <?php 
     require_once 'sidebar.php'; 
+    require '../classes/announcement.php';
 ?>
   <div class="content-wrapper">
     <div class="content-header">
@@ -33,7 +34,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <table id="example11" class="table table-bordered table-hover text-sm">
+                <table id="example1" class="table table-bordered table-hover text-sm">
                   <thead>
                     <tr class="bg-light">
                       <th width="15%">DATE</th>
@@ -43,8 +44,9 @@
                   </thead>
                   <tbody id="users_data">
                     <?php
-                    $sql = mysqli_query($conn, "SELECT * FROM announcement WHERE actDate >= '$date_today' ORDER BY actDate");
-                    while ($row = mysqli_fetch_array($sql)) {
+                      $announce = new Announcement();
+                      $announcement = $announce->display_announcement();
+                      foreach ($announcement as $row) {
                     ?>
                     <tr>
                       <?php if($row['actDate'] == $date_today): ?>

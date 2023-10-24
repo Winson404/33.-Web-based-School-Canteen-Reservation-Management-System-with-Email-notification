@@ -1,6 +1,6 @@
 <?php 
 
-	include 'config.php';
+	include 'includes/config.php';
 	include 'includes/function_create.php';
 
 	// use PHPMailer\PHPMailer\PHPMailer;

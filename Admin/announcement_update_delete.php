@@ -9,11 +9,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="process_update.php" method="POST" enctype="multipart/form-data">
+        <form action="../forms/announcement_update.php" method="POST" enctype="multipart/form-data">
           <input type="hidden" class="form-control" name="actId" required value="<?php echo $row['actId']; ?>">
           <div class="form-group">
             <span class="text-dark"><b>Announcement title</b></span>
-            <textarea name="activity" class="form-control" id="" cols="30" rows="5" placeholder="Enter announcement here..." required><?php echo $row['actName']; ?></textarea>
+            <textarea name="actName" class="form-control" id="" cols="30" rows="5" placeholder="Enter announcement here..." required><?php echo $row['actName']; ?></textarea>
           </div>
           <div class="form-group">
             <span class="text-dark"><b>Announcement date</b></span>
@@ -41,13 +41,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="process_delete.php" method="POST">
+        <form action="../forms/announcement_delete.php" method="POST">
           <input type="hidden" class="form-control" value="<?php echo $row['actId']; ?>" name="actId">
           <h6 class="text-center">Delete announcement record?</h6>
       </div>
       <div class="modal-footer alert-light">
         <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="fa-solid fa-ban"></i> Cancel</button>
-        <button type="submit" class="btn bg-danger" name="delete_activity"><i class="fas fa-trash"></i> Delete</button>
+        <button type="submit" class="btn bg-danger" name="delete_announcement"><i class="fas fa-trash"></i> Delete</button>
       </div>
         </form>
     </div>

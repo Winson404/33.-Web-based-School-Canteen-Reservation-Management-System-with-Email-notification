@@ -9,10 +9,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="process_save.php" method="POST" enctype="multipart/form-data">
+        <form action="../forms/announcement_create.php" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <span class="text-dark"><b>Announcement title</b></span>
-            <textarea name="activity" class="form-control" id="" cols="30" rows="5" placeholder="Enter announcement here..." required></textarea>
+            <textarea name="actName" class="form-control" id="" cols="30" rows="5" placeholder="Enter announcement here..." required></textarea>
           </div>
           <div class="form-group">
             <span class="text-dark"><b>Announcement date</b></span>
@@ -27,6 +27,7 @@
     </div>
   </div>
 </div>
+
 <!-- SERVES AS REMINDER: DISPLAY ACTIVITY WHEN ACTIVITY DATE IS TODAY -->
 <div class="modal fade" id="reminder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
