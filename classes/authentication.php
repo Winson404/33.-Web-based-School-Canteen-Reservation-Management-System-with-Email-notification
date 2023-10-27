@@ -31,8 +31,22 @@ class UserAuthentication {
                 exit();
             }
         } else {
-            $this->incrementLoginAttempts();
-            displayErrorMessage("Incorrect password.", "../login.php");
+            $query2 = "SELECT * FROM customer WHERE email='$email' AND password='$password'";
+            $result2 = mysqli_query($this->conn, $query2);
+                if (mysqli_num_rows($result2) === 1) {
+                $row2 = mysqli_fetch_array($result2);
+
+                $log_ID = $row2['cust_Id'];
+                $login_time = date("Y-m-d h:i A");
+                $login = mysqli_query($this->conn, "INSERT INTO log_history (cust_Id, login_time) VALUES ('$log_ID', '$login_time')");
+                $this->resetLoginAttempts();
+                $this->startSession('user_Id', $row2['cust_Id'], $login_time);
+                header("Location: ../User/index.php");
+                exit();
+            } else {
+                $this->incrementLoginAttempts();
+                displayErrorMessage("Incorrect password.", "../login.php");
+            }
         }
     }
 
@@ -71,6 +85,7 @@ class LogHistory {
         $conn = $this->db->getConnection();
         $currentDate = date('Y-m-d');
         $result = $conn->query("SELECT * FROM log_history JOIN users ON log_history.user_Id=users.user_Id ORDER BY log_Id DESC");
-        return $result->fetch_all(MYSQLI_ASSOC);
+        // return $result->fetch_all(MYSQLI_ASSOC);
+        return $result;
     }
 }

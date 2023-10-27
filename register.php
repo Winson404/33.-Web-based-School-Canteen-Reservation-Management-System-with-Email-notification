@@ -10,31 +10,54 @@
         <div class="row d-flex justify-content-center">
 
           <div class="col-lg-10 mt-5">
-            <form action="forms/user_create.php" method="POST" enctype="multipart/form-data">
+            <form action="forms/customer_create.php" method="POST" enctype="multipart/form-data">
             <div class="card card-outline card-primary">
               <div class="card-header text-center">
                 <a href="#" class="h1"><b>Registration</b></a>
               </div>
                 <div class="card-body">
                     <div class="row">
-
                         <div class="col-lg-12 mt-1 mb-2">
                           <a class="h5 text-primary"><b>Basic information</b></a>
                           <div class="dropdown-divider"></div>
                         </div>
-                        <div class="col-lg-4 col col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                          <div class="form-group">
+                            <span class="text-dark"><b>Type of user</b></span>
+                            <select class="form-control" name="user_type" id="user_type" required>
+                              <option selected disabled value="">Select type</option>
+                              <option value="Student">Student</option>
+                              <option value="Teacher">Teacher</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="year_section_div" style="display: none">
+                          <div class="form-group">
+                            <span class="text-dark"><b>Year and Section</b></span>
+                            <input type="text" class="form-control" placeholder="Year and Section" name="yr_section" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" id="position_div" style="display: none">
+                          <div class="form-group">
+                            <span class="text-dark"><b>Position</b></span>
+                            <input type="text" class="form-control" placeholder="Teacher's Position" name="teacherPosition" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                               <span class="text-dark"><b>First name</b></span>
                               <input type="text" class="form-control"  placeholder="First name" name="firstname" required onkeyup="lettersOnly(this)">
                             </div>
                         </div>
-                        <div class="col-lg-3 col col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                               <span class="text-dark"><b>Middle name</b></span>
                               <input type="text" class="form-control"  placeholder="Middle name" name="middlename" onkeyup="lettersOnly(this)">
                           </div>
                         </div>
-                        <div class="col-lg-3 col col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                               <span class="text-dark"><b>Last name</b></span>
                               <input type="text" class="form-control"  placeholder="Last name" name="lastname" required onkeyup="lettersOnly(this)">
@@ -46,25 +69,19 @@
                             <input type="text" class="form-control"  placeholder="Ext/Suffix" name="suffix">
                           </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                             <div class="form-group">
                               <span class="text-dark"><b>Date of Birth</b></span>
                               <input type="date" class="form-control" name="dob" placeholder="Date of birth" required id="birthdate" onchange="calculateAge()">
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-12">
                             <div class="form-group">
                               <span class="text-dark"><b>Age</b></span>
                               <input type="text" class="form-control bg-white" placeholder="Age" required id="txtage" name="age" readonly>
                             </div>
                         </div>
-                        <div class="col-lg-7 col-md-6 col-sm-12 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Place of Birth</b></span>
-                              <textarea name="birthplace" id="" cols="30" rows="1" class="form-control" required placeholder="Place of Birth"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Sex</b></span>
                             <select class="form-control" name="gender" required>
@@ -75,7 +92,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Civil Status</b></span>
                             <select class="form-control" name="civilstatus" required>
@@ -87,37 +104,6 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Profession/ Occupation</b></span>
-                              <input type="text" class="form-control"  placeholder="Profession/ Occupation" name="occupation" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                          <div class="form-group">
-                            <span class="text-dark"><b>Religion</b></span>
-                            <select class="form-control" name="religion" required>
-                              <option selected disabled value="">Select religion</option>
-                              <option value="Roman Catholic">Roman Catholic</option>
-                              <option value="Iglesia Ni Cristo">Iglesia Ni Cristo</option>
-                              <option value="Evangelical Christianity">Evangelical Christianity</option>
-                              <option value="Islam">Islam</option>
-                              <option value="Protestants">Protestants</option>
-                              <option value="Seventh-day Adventism">Seventh-day Adventism</option>
-                              <option value="Aglipayan">Aglipayan</option>
-                              <option value="Bible Baptist Church">Bible Baptist Church</option>
-                              <option value="United Church of Christ in the Philippines">United Church of Christ in the Philippines</option>
-                              <option value="Jehovah's Witnesses">Jehovah's Witnesses</option>
-                              <option value="Buddhist">Buddhist</option>
-                              <option value="Methodist">Methodist</option>
-                              <option value="Hindu">Hindu</option>
-                              <option value="Judaism">Judaism</option>
-                              <option value="Ang Dating Daan">Ang Dating Daan</option>
-                              <option value="Other Religion">Other Religion</option>
-                            </select>
-                          </div>
-                        </div>
-
 
                         <div class="col-lg-12 mt-3 mb-2 col-md-12 col-sm-12 col-12">
                           <a class="h5 text-primary"><b>Contact details</b></a>
@@ -139,63 +125,13 @@
                               </div>
                             </div>
                         </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="form-group">
+                              <span class="text-dark"><b>Complete address</b></span>
+                              <textarea name="address" class="form-control" id="" cols="30" rows="2" placeholder="Complete address" required></textarea>
+                            </div>
+                        </div>
                         
-
-                        <div class="col-lg-12 mt-3 mb-2 col-md-12 col-sm-12 col-12">
-                          <a class="h5 text-primary"><b>Complete ddress</b></a>
-                          <div class="dropdown-divider"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>House No.</b></span>
-                              <input type="text" class="form-control"  placeholder="House No." name="house_no">
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Street name</b></span>
-                              <input type="text" class="form-control"  placeholder="Street name" name="street_name">
-                            </div>
-                        </div>
-                         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Sitio/Purok</b></span>
-                              <input type="text" class="form-control"  placeholder="Sitio/Purok" name="purok">
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Zone</b></span>
-                              <input type="text" class="form-control"  placeholder="Zone" name="zone">
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Barangay</b></span>
-                              <input type="text" class="form-control"  placeholder="Barangay" name="barangay" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Municipality</b></span>
-                              <input type="text" class="form-control"  placeholder="Municipality" name="municipality" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Province</b></span>
-                              <input type="text" class="form-control"  placeholder="Province" name="province" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="form-group">
-                              <span class="text-dark"><b>Region</b></span>
-                              <input type="text" class="form-control"  placeholder="Region" name="region" required>
-                            </div>
-                        </div>
-
-
-
                         <div class="col-lg-12 mt-3 mb-2 col-md-12 col-sm-12 col-12">
                           <a class="h5 text-primary"><b>Account password</b></a>
                           <div class="dropdown-divider"></div>
@@ -214,7 +150,6 @@
                               <small id="wrong_pass_alert" class="text-bold" style="font-style: italic;font-size: 12px;"></small>
                             </div>
                         </div>
-
 
                         <div class="col-lg-12 mt-3 mb-2">
                           <a class="h5 text-primary"><b>Additional information</b></a>
@@ -296,3 +231,28 @@
 <br>
 <br>
 <?php include 'footer.php'; ?>
+
+<script>
+  var userTypeSelect = document.getElementById('user_type');
+  var yearSectionDiv = document.getElementById('year_section_div');
+  var positionDiv = document.getElementById('position_div');
+
+  userTypeSelect.addEventListener('change', function() {
+    if (userTypeSelect.value === 'Student') {
+      yearSectionDiv.style.display = 'block';
+      positionDiv.style.display = 'none';
+      document.querySelector('[name=yr_section]').required = true;
+      document.querySelector('[name=teacherPosition]').required = false;
+    } else if (userTypeSelect.value === 'Teacher') {
+      yearSectionDiv.style.display = 'none';
+      positionDiv.style.display = 'block';
+      document.querySelector('[name=yr_section]').required = false;
+      document.querySelector('[name=teacherPosition]').required = true;
+    } else {
+      yearSectionDiv.style.display = 'none';
+      positionDiv.style.display = 'none';
+      document.querySelector('[name=yr_section]').required = false;
+      document.querySelector('[name=teacherPosition]').required = false;
+    }
+  });
+</script>

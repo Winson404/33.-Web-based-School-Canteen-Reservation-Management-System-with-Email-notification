@@ -42,7 +42,7 @@
                       <th>NAME</th>
                       <th>GENDER</th>
                       <th>EMAIL/CONTACT</th>
-                      <th>Usertype</th>
+                      <th>USERTYPE</th>
                       <th>DATE ADDED</th>
                       <th>TOOLS</th>
                     </tr>
@@ -59,7 +59,7 @@
                           <img src="../assets/images-users/<?php echo $row['image']; ?>" alt="" width="25" height="25" class="img-circle d-block m-auto">
                         </a href="">
                       </td>
-                      <td><?php echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></td>
+                      <td><?php echo $row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix']; ?></td>
                       <td><?= $row['gender'] ?></td>
                       <td><?php echo $row['email']; ?> <br> <span class="text-info"><?php if($row['contact'] !== '') { echo '+63 '.$row['contact']; } ?></span></td>
                       <td>

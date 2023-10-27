@@ -14,9 +14,16 @@ class UserSession {
 
         if (mysqli_num_rows($result) === 1) {
             return mysqli_fetch_array($result);
+        } else {
+            $query = "SELECT * FROM customer WHERE cust_Id = '$userId'";
+            $result = mysqli_query($this->conn, $query);
+            if (mysqli_num_rows($result) === 1) {
+                return mysqli_fetch_array($result);
+            }
+            return null;
         }
 
-        return null;
+        
     }
 
     public function isUserLoggedIn() {

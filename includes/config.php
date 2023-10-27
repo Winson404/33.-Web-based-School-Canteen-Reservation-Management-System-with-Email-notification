@@ -13,7 +13,7 @@
 	    private $host = 'localhost';
 	    private $username = 'root';
 	    private $password = '';
-	    private $database = 'new_template';
+	    private $database = 'reservation';
 	    private $conn;
 
 	    public function __construct() {

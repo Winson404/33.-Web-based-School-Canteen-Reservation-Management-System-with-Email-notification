@@ -6,7 +6,6 @@ require '../classes/UserSession.php';
 
 $db = new Database();
 $userSession = new UserSession($db->getConnection());
-require '../classes/announcement.php';
 // Check if a user is logged in
 if ($userSession->isUserLoggedIn()) {
     $id = $_SESSION['user_Id'];
@@ -66,9 +65,9 @@ if ($userSession->isUserLoggedIn()) {
             basename($_SERVER['PHP_SELF']) == 'admin.php' ||
             basename($_SERVER['PHP_SELF']) == 'admin_mgmt.php' ||
             basename($_SERVER['PHP_SELF']) == 'admin_view.php' ||
-            basename($_SERVER['PHP_SELF']) == 'users.php' ||
-            basename($_SERVER['PHP_SELF']) == 'users_mgmt.php' ||
-            basename($_SERVER['PHP_SELF']) == 'users_view.php'
+            basename($_SERVER['PHP_SELF']) == 'customer.php' ||
+            basename($_SERVER['PHP_SELF']) == 'customer_mgmt.php' ||
+            basename($_SERVER['PHP_SELF']) == 'customer_view.php'
             ) ? 'active' : '';
             ?>
             ">
@@ -81,9 +80,9 @@ if ($userSession->isUserLoggedIn()) {
             basename($_SERVER['PHP_SELF']) == 'admin.php' ||
             basename($_SERVER['PHP_SELF']) == 'admin_mgmt.php' ||
             basename($_SERVER['PHP_SELF']) == 'admin_view.php' ||
-            basename($_SERVER['PHP_SELF']) == 'users.php' ||
-            basename($_SERVER['PHP_SELF']) == 'users_mgmt.php' ||
-            basename($_SERVER['PHP_SELF']) == 'users_view.php'
+            basename($_SERVER['PHP_SELF']) == 'customer.php' ||
+            basename($_SERVER['PHP_SELF']) == 'customer_mgmt.php' ||
+            basename($_SERVER['PHP_SELF']) == 'customer_view.php'
             ) ? 'style="display: block;"' : '';
             ?>
             >
@@ -94,19 +93,39 @@ if ($userSession->isUserLoggedIn()) {
               </a>
             </li>
             <li class="nav-item">
-              <a href="users.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'users.php' || basename($_SERVER['PHP_SELF']) == 'users_mgmt.php' || basename($_SERVER['PHP_SELF']) == 'users_view.php') ? 'active' : ''; ?>">
+              <a href="customer.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'customer.php' || basename($_SERVER['PHP_SELF']) == 'customer_mgmt.php' || basename($_SERVER['PHP_SELF']) == 'customer_view.php') ? 'active' : ''; ?>">
                 <i class="far fa-circle nav-icon"></i>
-                <p>&nbsp;&nbsp; Users</p>
+                <p>&nbsp;&nbsp; Customer</p>
               </a>
             </li>
           </ul>
         </li>
         <li class="nav-item">
-          <a href="announcement.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'announcement.php') ? 'active' : ''; ?>">
-            <i class="fa-solid fa-bell"></i>
-            <p>&nbsp;&nbsp; Announcement</p>
+          <a href="category.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'category.php') ? 'active' : ''; ?>">
+            <i class="fas fa-tags"></i>
+            <p>&nbsp;&nbsp; Category</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="product.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'product.php' || basename($_SERVER['PHP_SELF']) == 'product_mgmt.php' || basename($_SERVER['PHP_SELF']) == 'product_view.php') ? 'active' : ''; ?>">
+            <i class="fas fa-shopping-bag"></i>
+            <p>&nbsp;&nbsp; Foods</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="reservation.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'reservation.php') ? 'active' : ''; ?>">
+            <i class="fas fa-calendar-check"></i>
+            <p>&nbsp;&nbsp; Reservations</p>
+          </a>
+        </li>
+        <li class="nav-header text-secondary" style="margin-bottom: -10px;">REPORTS</li>
+        <li class="nav-item">
+          <a href="income_report.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'income_report.php') ? 'active' : ''; ?>">
+            <i class="fas fa-chart-bar"></i>
+            <p>&nbsp;&nbsp; Income report</p>
+          </a>
+        </li>
+        <li class="nav-header text-secondary" style="margin-bottom: -10px;">LOGS</li>
         <li class="nav-item">
           <a href="log_history.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'log_history.php') ? 'active' : ''; ?>">
             <i class="fas fa-list-alt"></i>

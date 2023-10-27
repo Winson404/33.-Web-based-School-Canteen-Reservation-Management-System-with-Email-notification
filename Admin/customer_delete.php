@@ -1,5 +1,5 @@
 <!-- CHANGE PASSWORD -->
-<div class="modal fade" id="password<?php echo $row['user_Id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="password<?php echo $row['cust_Id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-light">
@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <form action="process_update.php" method="POST">
-          <input type="hidden" class="form-control" value="<?php echo $row['user_Id']; ?>" name="user_Id">
+          <input type="hidden" class="form-control" value="<?php echo $row['cust_Id']; ?>" name="cust_Id">
           <div class="form-group mb-3">
             <label for=""><b>Old password</b></label>
             <input type="password" class="form-control" placeholder="Old password" name="OldPassword" required minlength="8">
@@ -35,7 +35,7 @@
   </div>
 </div>
 <!-- VIEW PROFILE PHOTO -->
-<div class="modal fade" id="viewphoto<?php echo $row['user_Id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewphoto<?php echo $row['cust_Id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-light">
@@ -54,23 +54,23 @@
   </div>
 </div>
 <!-- DELETE -->
-<div class="modal fade" id="delete<?php echo $row['user_Id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete<?php echo $row['cust_Id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-light">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-user-large"></i> Delete User</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-user-large"></i> Delete Customer</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true"><i class="fa-solid fa-circle-xmark"></i></span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="../forms/user_delete.php" method="POST">
-          <input type="hidden" class="form-control" value="<?php echo $row['user_Id']; ?>" name="user_Id">
-          <h6 class="text-center">Delete user record?</h6>
+        <form action="../forms/customer_delete.php" method="POST">
+          <input type="hidden" class="form-control" value="<?php echo $row['cust_Id']; ?>" name="cust_Id">
+          <h6 class="text-center">Delete customer record?</h6>
         </div>
         <div class="modal-footer alert-light">
           <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="fa-solid fa-ban"></i> Cancel</button>
-          <button type="submit" class="btn bg-danger" name="delete_user"><i class="fas fa-trash"></i> Delete</button>
+          <button type="submit" class="btn bg-danger" name="delete_customer"><i class="fas fa-trash"></i> Delete</button>
         </div>
       </form>
     </div>

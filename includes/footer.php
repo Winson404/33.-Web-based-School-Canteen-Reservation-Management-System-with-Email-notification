@@ -287,8 +287,29 @@
   });
 
 
-</script>
+  var userTypeSelect = document.getElementById('user_type');
+  var yearSectionDiv = document.getElementById('year_section_div');
+  var positionDiv = document.getElementById('position_div');
 
+  userTypeSelect.addEventListener('change', function() {
+    if (userTypeSelect.value === 'Student') {
+      yearSectionDiv.style.display = 'block';
+      positionDiv.style.display = 'none';
+      document.querySelector('[name=yr_section]').required = true;
+      document.querySelector('[name=teacherPosition]').required = false;
+    } else if (userTypeSelect.value === 'Teacher') {
+      yearSectionDiv.style.display = 'none';
+      positionDiv.style.display = 'block';
+      document.querySelector('[name=yr_section]').required = false;
+      document.querySelector('[name=teacherPosition]').required = true;
+    } else {
+      yearSectionDiv.style.display = 'none';
+      positionDiv.style.display = 'none';
+      document.querySelector('[name=yr_section]').required = false;
+      document.querySelector('[name=teacherPosition]').required = false;
+    }
+  });
+</script>
 
 </body>
 </html>

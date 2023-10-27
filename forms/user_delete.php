@@ -26,20 +26,4 @@ if (isset($_POST['delete_admin'])) {
 }
 
 
-// DELETE ADMIN - ADMIN_DELETE.PHP
-if (isset($_POST['delete_user'])) {
-    $user_Id        = $_POST['user_Id'];
-    $result = $person->delete_user($user_Id);
-    // var_dump($result);
-    if($result) {
-        displayDeleteMessage('../Admin/users.php');
-    } else {
-        displayErrorMessage("Something went wrong while deleting the information.", '../Admin/admin.php'); 
-    }
-}
-
-
-
-
-
 ?>

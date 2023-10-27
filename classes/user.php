@@ -51,10 +51,12 @@
 	        $conn = $this->db->getConnection();
 	        if($user_type == 'Admin') {
 				$result = $conn->query("SELECT * FROM users WHERE (user_type = 'Admin' || user_type = 'Staff') ");
-	        	return $result->fetch_all(MYSQLI_ASSOC);
+	        	// return $result->fetch_all(MYSQLI_ASSOC);
+        		return $result;
 	        } else {
 	        	$result = $conn->query("SELECT * FROM users WHERE user_type = 'User' ");
-	        	return $result->fetch_all(MYSQLI_ASSOC);
+	        	// return $result->fetch_all(MYSQLI_ASSOC);
+        		return $result;
 	        }
 	    }
 
@@ -74,8 +76,13 @@
 	    // UPDATE USER
 	    public function update_user($user_Id, $user_type, $firstname, $middlename, $lastname, $suffix, $dob, $age, $birthplace, $gender, $civilstatus, $occupation, $religion, $email, $contact, $house_no, $street_name, $purok, $zone, $barangay, $municipality, $province, $region, $file) {
 	        $conn = $this->db->getConnection();
-	        $stmt = $conn->prepare("UPDATE users SET user_type = ?, firstname = ?, middlename = ?, lastname = ?, suffix = ?, dob = ?, age = ?, birthplace = ?, gender = ?, civilstatus = ?, occupation = ?, religion = ?, email = ?, contact = ?, house_no = ?, street_name = ?, purok = ?, zone = ?, barangay = ?, municipality = ?, province = ?, region = ?, image = ? WHERE user_Id = ?");
-	        $stmt->bind_param("sssssssssssssssssssssssi", $user_type, $firstname, $middlename, $lastname, $suffix, $dob, $age, $birthplace, $gender, $civilstatus, $occupation, $religion, $email, $contact, $house_no, $street_name, $purok, $zone, $barangay, $municipality, $province, $region, $file, $user_Id);
+	        if(empty($file)) {
+	        	$stmt = $conn->prepare("UPDATE users SET user_type = ?, firstname = ?, middlename = ?, lastname = ?, suffix = ?, dob = ?, age = ?, birthplace = ?, gender = ?, civilstatus = ?, occupation = ?, religion = ?, email = ?, contact = ?, house_no = ?, street_name = ?, purok = ?, zone = ?, barangay = ?, municipality = ?, province = ?, region = ? WHERE user_Id = ?");
+	        	$stmt->bind_param("ssssssssssssssssssssssi", $user_type, $firstname, $middlename, $lastname, $suffix, $dob, $age, $birthplace, $gender, $civilstatus, $occupation, $religion, $email, $contact, $house_no, $street_name, $purok, $zone, $barangay, $municipality, $province, $region, $user_Id);
+	        } else {
+	        	$stmt = $conn->prepare("UPDATE users SET user_type = ?, firstname = ?, middlename = ?, lastname = ?, suffix = ?, dob = ?, age = ?, birthplace = ?, gender = ?, civilstatus = ?, occupation = ?, religion = ?, email = ?, contact = ?, house_no = ?, street_name = ?, purok = ?, zone = ?, barangay = ?, municipality = ?, province = ?, region = ?, image = ? WHERE user_Id = ?");
+	        	$stmt->bind_param("sssssssssssssssssssssssi", $user_type, $firstname, $middlename, $lastname, $suffix, $dob, $age, $birthplace, $gender, $civilstatus, $occupation, $religion, $email, $contact, $house_no, $street_name, $purok, $zone, $barangay, $municipality, $province, $region, $file, $user_Id);
+	        }
 	        return $stmt->execute();
 	    }
 

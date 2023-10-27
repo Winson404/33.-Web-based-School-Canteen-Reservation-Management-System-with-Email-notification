@@ -13,7 +13,7 @@
         <p class="login-box-msg">Sign in to start your session</p>
         <form action="forms/login_processes.php" method="post">
           <div class="input-group">
-            <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email"  onkeydown="validation()" onkeyup="validation()" >
+            <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email"  onkeydown="validation()" onkeyup="validation()" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>

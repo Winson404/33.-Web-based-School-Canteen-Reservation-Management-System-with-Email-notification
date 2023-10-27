@@ -150,55 +150,55 @@
             </div>
           </li> -->
           <!-- Notifications Dropdown Menu -->
-          <?php
-            $announcementManager = new Announcement();
-            $announcementData = $announcementManager->count_announcement();
-            $announcements = $announcementData['announcements'];
-            $count = $announcementData['count'];
-             // LIMIT NUMBER OF CHARACTERS
-             function custom_echo($x, $length) {
-               if(strlen($x)<=$length) {
-                 echo $x;
-               } else {
-                 $y=substr($x,0,$length) . '...';
-                 echo $y;
-               }
-             }
-          ?>
-          <li class="nav-item dropdown">
+         <!--  <?php
+           // $announcementManager = new Announcement();
+           // $announcementData = $announcementManager->count_announcement();
+           // $announcements = $announcementData['announcements'];
+           // $count = $announcementData['count'];
+           //  // LIMIT NUMBER OF CHARACTERS
+           //  function custom_echo($x, $length) {
+           //    if(strlen($x)<=$length) {
+           //      echo $x;
+           //    } else {
+           //      $y=substr($x,0,$length) . '...';
+           //      echo $y;
+           //    }
+           //  }
+          ?> -->
+         <!--  <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
               <i class="far fa-bell"></i>
-              <span class="badge badge-warning navbar-badge"><?php echo $count; ?></span>
+              <span class="badge badge-warning navbar-badge"><?php //echo $count; ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <span class="dropdown-item dropdown-header">
                 <?php
-                $message = ($count < 1) ? 'No announcement for today' : ($count == 1 ? $count . ' announcement notification' : $count . ' announcement notifications');
-                echo $message;
+                //$message = ($count < 1) ? 'No announcement for today' : ($count == 1 ? $count . ' announcement notification' : $count . ' announcement //notifications');
+                //echo $message;
                 ?>
               </span>
               <div class="dropdown-divider"></div>
               
               <?php
-                if($count >= 1) {
-                foreach ($announcements as $announcement) {
+                //if($count >= 1) {
+                //foreach ($announcements as $announcement) {
               ?>
               <a href="#" class="dropdown-item">
-                <i class="fa-solid fa-circle-info mr-2"></i> <?php echo custom_echo($announcement['actName'], 15); ?>
-                <span class="float-right text-muted text-sm"><?php echo $announcement['actDate']; ?></span>
+                <i class="fa-solid fa-circle-info mr-2"></i> <?php //echo custom_echo($announcement['actName'], 15); ?>
+                <span class="float-right text-muted text-sm"><?php //echo $announcement['actDate']; ?></span>
               </a>
               <div class="dropdown-divider"></div>
               <?php
-                }
-                }
+                //}
+                //}
               ?>
-              <?php if($count == 1) : ?>
+              <?php //if($count == 1) : ?>
               <a type="button" data-toggle="modal" data-target="#reminder" class="dropdown-item dropdown-footer">See Announcement</a>
-              <?php else: ?>
+              <?php //else: ?>
               <a type="button" data-toggle="modal" data-target="#reminder" class="dropdown-item dropdown-footer">See All Announcement</a>
-              <?php endif; ?>
+              <?php //endif; ?>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
               <!-- <img src="../images-users/<?php //echo $row['image']; ?>" alt="User Image" class="mr-3 img-circle" height="50" width="50"> -->

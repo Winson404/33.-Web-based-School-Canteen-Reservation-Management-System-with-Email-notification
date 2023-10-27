@@ -101,7 +101,7 @@
                 <div class=" d-flex justify-content-center bg-dark d-block m-auto" style="max-height: 120px; min-height: 120px; width: 120px; border: 3px solid darkgray;">
                   <img src="../assets/images-users/<?php echo $row['image']; ?>" alt="" class="img-fluid d-block m-auto">
                 </div>
-                <p class="text-center text-sm text-muted">Resident photo</p>
+                <p class="text-center text-sm text-muted">User photo</p>
               </div>  
             </div>
             <div class="row p-2">
