@@ -359,10 +359,9 @@ require_once 'sidebar.php';
                         </div>
                       </div>
                     </form>
-                    
                   </div>
                   <div class="tab-pane" id="accountsecurity">
-                    <form action="process_update.php" method="POST" enctype="multipart/form-data">
+                    <form action="../forms/user_update.php" method="POST" enctype="multipart/form-data">
                       <input type="hidden" class="form-control" value="<?php echo $row['user_Id']; ?>" name="user_Id">
                       <div class="form-group row">
                         <label for="Old password" class="col-sm-2 col-form-label">Old password</label>

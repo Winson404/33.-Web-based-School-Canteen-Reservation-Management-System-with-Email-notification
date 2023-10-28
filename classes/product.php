@@ -49,7 +49,7 @@
 	    // DISPLAY PRODUCT
 	    public function display_product() {
 	        $conn = $this->db->getConnection();
-	        $result = $conn->query("SELECT * FROM product JOIN category ON product.cat_Id=category.cat_Id");
+	        $result = $conn->query("SELECT * FROM product JOIN category ON product.cat_Id=category.cat_Id WHERE product.prod_status=1");
         	// return $result->fetch_all(MYSQLI_ASSOC);
         	return $result;
 	    }

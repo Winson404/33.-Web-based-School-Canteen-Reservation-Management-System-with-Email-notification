@@ -28,12 +28,25 @@
 	        $stmt->bind_param("s", $email);
 	        $stmt->execute();
 	        $result = $stmt->get_result();
+	        if($result->num_rows > 0) {
+	        	return $result->num_rows > 0;
+	        } else {
+	        	$stmt2 = $conn->prepare("SELECT * FROM users WHERE email = ?");
+		        if (!$stmt2) {
+		            die('Error in SQL query: ' . $conn->error);
+		        }
+		        $stmt2->bind_param("s", $email);
+		        $stmt2->execute();
+		        $result2 = $stmt2->get_result();
+		        if($result2) {
+		        	return $result2->num_rows > 0;
+		        }
+	        }
 	        
-	        return $result->num_rows > 0;
 	    }
 
 	    // CHECK CUSTOMER EMAIL FOR UPDATION
-	    public function update_check_email_exists($cust_Id, $email) {
+	     public function update_check_email_exists($cust_Id, $email) {
 	        $conn = $this->db->getConnection();
 	        $stmt = $conn->prepare("SELECT * FROM customer WHERE email = ? AND cust_Id != ?");
 	        if (!$stmt) {
@@ -42,9 +55,22 @@
 	        $stmt->bind_param("si", $email, $cust_Id);
 	        $stmt->execute();
 	        $result = $stmt->get_result();
-	        
-	        return $result->num_rows > 0;
+	        if($result->num_rows > 0) {
+	        	return $result->num_rows > 0;
+	        } else {
+	        	$stmt2 = $conn->prepare("SELECT * FROM users WHERE email = ?");
+		        if (!$stmt2) {
+		            die('Error in SQL query: ' . $conn->error);
+		        }
+		        $stmt2->bind_param("s", $email);
+		        $stmt2->execute();
+		        $result2 = $stmt2->get_result();
+		        if($result2) {
+		        	return $result2->num_rows > 0;
+		        }
+	        }
 	    }
+	    
 	    
 	    // DISPLAY CUSTOMER
 	    public function display_customer() {
@@ -123,6 +149,15 @@
 		    $result = $conn->query($query);
 		    $count = $result->num_rows;
 		    return $count;
+		}
+
+
+		// CHANGE CUSTOMER PASSWORD
+		public function changeAdminPassword($cust_Id, $hashedPassword) {
+			$conn = $this->db->getConnection();
+	        $stmt = $conn->prepare("UPDATE customer SET password = ? WHERE cust_Id = ?");
+	        $stmt->bind_param("si", $hashedPassword, $cust_Id);
+	        return $stmt->execute();
 		}
 	}
 

@@ -71,10 +71,10 @@
 	    }
 
 	    // GET RESERVATION
-	    public function get_reservation($actId) {
+	    public function get_reservation($reserve_Id) {
 	        $conn = $this->db->getConnection();
 	        $userId = mysqli_real_escape_string($conn, $userId);
-	        $result = $conn->query("SELECT * FROM reservation WHERE actId = '$actId'");
+	        $result = $conn->query("SELECT * FROM reservation JOIN product ON reservation.prod_Id=product.prod_Id JOIN category oN product.cat_Id=category.cat_Id JOIN customer ON reservation.cust_Id=customer.cust_Id WHERE reservation.reserve_Id='$reserve_Id' ");
 	        if ($result && $result->num_rows === 1) {
 	            return $result->fetch_assoc();
 	        }

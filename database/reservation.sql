@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2023 at 09:18 PM
+-- Generation Time: Oct 28, 2023 at 04:34 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -103,15 +103,17 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `image` varchar(255) NOT NULL,
   `verification_code` int(11) NOT NULL,
   `date_registered` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=88 ;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`cust_Id`, `user_type`, `yr_section`, `teacherPosition`, `firstname`, `middlename`, `lastname`, `suffix`, `dob`, `age`, `gender`, `civilstatus`, `email`, `contact`, `address`, `password`, `image`, `verification_code`, `date_registered`) VALUES
-(84, 'Maleds', '2020-01-28', '3 years old', 'Customer', 'Customer', 'Customer', 'Customer', '2018-01-30', '5 years old', 'Male', 'Single', 'customer@gmail.com', '9359428963', 'Customer', '0192023a7bbd73250516f069df18b500', 'assumpta.png', 0, '2023-10-25 00:00:00'),
-(85, 'Teacher', '', 'Teacher', 'Teacher', 'Teacher', 'Teacher', '', '2020-01-29', '3 years old', 'Male', 'Single', 'customer2@gmail.com', '9359428963', 'Teacher', '0192023a7bbd73250516f069df18b500', 'aisat.png', 0, '2023-10-27 22:38:05');
+(84, 'Student', '2020-01-28', '3 years old', 'Customer', 'Customer', 'Customer', 'Customer', '2018-01-30', '5 years old', 'Male', 'Single', 'customer@gmail.com', '9359428963', 'Customer', '7488e331b8b64e5794da3fa4eb10ad5d', 'assumpta.png', 276702, '2023-10-25 00:00:00'),
+(85, 'Teacher', '', 'Teacher', 'Teacher', 'Teacher', 'Teacher', '', '2020-01-29', '3 years old', 'Male', 'Single', 'customer2@gmail.com', '9359428963', 'Teacher', '7488e331b8b64e5794da3fa4eb10ad5d', 'aisat.png', 0, '2023-10-27 22:38:05'),
+(86, 'Student', 'Smaple', '', 'Digong', 'Digong', 'DigongDigong', 'Digong', '2020-01-28', '3 years old', 'Male', 'Married', 'adminDigong@gmail.com', '9359428963', 'Digong', 'fc79c7fecc271d0cd3b6ae2b44ec92d5', 'aics.jpg', 0, '2023-10-28 13:56:22'),
+(87, 'Student', 'dsads', '', 'adsa', 'dsadsa', 'dsad', 'dsadsad', '2020-03-04', '3 years old', 'Male', 'Married', 'addsa432min@gmail.com', '9359428963', 'dsadsadsad', 'c162de19c4c3731ca3428769d0cd593d', 'berna.png', 0, '2023-10-28 22:13:23');
 
 -- --------------------------------------------------------
 
@@ -123,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `income` (
 `Id` int(11) NOT NULL,
   `reserve_Id` int(11) NOT NULL,
   `date_added` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `income`
@@ -131,7 +133,10 @@ CREATE TABLE IF NOT EXISTS `income` (
 
 INSERT INTO `income` (`Id`, `reserve_Id`, `date_added`) VALUES
 (1, 15, '2023-10-28 01:39:31'),
-(2, 16, '2023-10-28 01:40:06');
+(2, 16, '2023-10-28 01:40:06'),
+(3, 11, '2023-10-28 13:49:04'),
+(4, 24, '2023-10-28 13:49:45'),
+(5, 11, '2023-10-28 13:50:30');
 
 -- --------------------------------------------------------
 
@@ -144,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `log_history` (
   `user_Id` int(11) NOT NULL,
   `login_time` varchar(100) NOT NULL,
   `logout_time` varchar(100) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `log_history`
@@ -193,7 +198,12 @@ INSERT INTO `log_history` (`log_Id`, `user_Id`, `login_time`, `logout_time`) VAL
 (40, 66, '2023-10-27 06:04 PM', ''),
 (41, 66, '2023-10-27 10:37 PM', ''),
 (42, 66, '2023-10-27 10:39 PM', ''),
-(43, 66, '2023-10-28 12:55 AM', '');
+(43, 66, '2023-10-28 12:55 AM', ''),
+(44, 66, '2023-10-28 01:32 PM', ''),
+(45, 66, '2023-10-28 02:07 PM', ''),
+(46, 66, '2023-10-28 09:22 PM', ''),
+(47, 66, '2023-10-28 09:33 PM', ''),
+(48, 66, '2023-10-28 10:10 PM', '');
 
 -- --------------------------------------------------------
 
@@ -212,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `nutritional_info` text NOT NULL,
   `preparation_time` varchar(50) NOT NULL,
   `prod_image` varchar(255) NOT NULL,
+  `prod_status` int(11) NOT NULL DEFAULT '1' COMMENT '0=Unavailable, 1=Available',
   `date_added` datetime NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
@@ -219,12 +230,12 @@ CREATE TABLE IF NOT EXISTS `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`prod_Id`, `cat_Id`, `prod_name`, `prod_description`, `price`, `stock`, `ingredients`, `nutritional_info`, `preparation_time`, `prod_image`, `date_added`) VALUES
-(1, 1, 'Food 2', 'Samples', 22, 22, 'Samples', 'Samples', 'Samples', 'istockphoto-450262987-612x612.jpg', '2023-10-25 03:02:53'),
-(2, 3, 'Food 1', 'fdsf', 2, 2, 'dsa', 'dsa', 'dsa', 'istockphoto-470860695-612x612.jpg', '2023-10-25 19:44:35'),
-(3, 4, 'Food 3', 'dsa', 2, 2, 'dsf', 'fdsf', 'fds', 'istockphoto-545356714-612x612.jpg', '2023-10-25 19:44:52'),
-(4, 5, 'Food 4', 'dsa', 2, 2, 'dsad', 'sadsa', 'dsa', 'istockphoto-620744590-612x612.jpg', '2023-10-25 19:45:06'),
-(5, 6, 'Food 5', 'Food 5', 2, 2, 'Food 5', 'Food 5', 'Food 5', 'istockphoto-638742100-612x612.jpg', '2023-10-25 19:45:22');
+INSERT INTO `product` (`prod_Id`, `cat_Id`, `prod_name`, `prod_description`, `price`, `stock`, `ingredients`, `nutritional_info`, `preparation_time`, `prod_image`, `prod_status`, `date_added`) VALUES
+(1, 1, 'Food 2', 'Samples', 22, 22, 'Samples', 'Samples', 'Samples', 'istockphoto-450262987-612x612.jpg', 1, '2023-10-25 03:02:53'),
+(2, 3, 'Food 1', 'fdsf', 2, 2, 'dsa', 'dsa', 'dsa', 'istockphoto-470860695-612x612.jpg', 1, '2023-10-25 19:44:35'),
+(3, 4, 'Food 3', 'dsa', 2, 2, 'dsf', 'fdsf', 'fds', 'istockphoto-545356714-612x612.jpg', 1, '2023-10-25 19:44:52'),
+(4, 5, 'Food 4', 'dsa', 2, 2, 'dsad', 'sadsa', 'dsa', 'istockphoto-620744590-612x612.jpg', 1, '2023-10-25 19:45:06'),
+(5, 6, 'Food 5', 'Food 5', 2, 2, 'Food 5', 'Food 5', 'Food 5', 'istockphoto-638742100-612x612.jpg', 1, '2023-10-25 19:45:22');
 
 -- --------------------------------------------------------
 
@@ -239,18 +250,17 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `qty` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0' COMMENT '0=Pending, 1=Approved, 2=Delivered, 3=Unavailable',
   `date_reserved` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `reservation`
 --
 
 INSERT INTO `reservation` (`reserve_Id`, `cust_Id`, `prod_Id`, `qty`, `status`, `date_reserved`) VALUES
-(11, 84, 2, 28, 1, '2023-09-30 22:11:41'),
-(15, 85, 1, 4, 2, '2023-10-27 22:39:08'),
-(16, 85, 2, 45, 2, '2023-10-28 22:39:11'),
-(17, 85, 3, 2, 0, '2023-10-27 22:39:13'),
-(24, 84, 2, 10, 0, '2023-10-28 03:14:46');
+(25, 84, 1, 6, 3, '2023-10-28 14:00:53'),
+(26, 84, 2, 4, 0, '2023-10-28 14:00:57'),
+(27, 84, 3, 5, 0, '2023-10-28 14:01:01'),
+(28, 84, 1, 5, 0, '2023-10-28 14:02:08');
 
 -- --------------------------------------------------------
 
@@ -286,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_type` varchar(50) NOT NULL DEFAULT 'User',
   `verification_code` int(11) NOT NULL,
   `date_registered` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=85 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=84 ;
 
 --
 -- Dumping data for table `users`
@@ -297,7 +307,7 @@ INSERT INTO `users` (`user_Id`, `firstname`, `middlename`, `lastname`, `suffix`,
 (72, 'Userds', 'Users', 'User', 'Jr', '2022-12-21', '5 days old', 'user123@gmail.com', '9359428963', 'gfdgfdg', 'Male', 'Married', 'gfdgfdgd', 'Buddhist', 'gfdg', 'fdg', 'gdfgdg', 'gfdg', 'dfgd', 'fdgdg', 'fdg', 'dfg', 'ama.png', '0192023a7bbd73250516f069df18b500', 'Staff', 295016, '2022-12-27'),
 (73, 'Sampleddd', 'Sample', 'Sample', '', '2023-10-02', '1 week old', 'sonerwin12@gmail.com', '9359428963', 'Sample', 'Female', 'Single', 'Sample', 'Methodist', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', '', '0192023a7bbd73250516f069df18b500', 'Admin', 276649, '2023-10-10'),
 (79, 'Samples', 'Samples', 'Samples', 'Samples', '2022-03-02', '1 year old', 'admSampleinsss@gmail.com', '9359428962', 'Samples', 'Female', 'Single', 'Samples', 'Hindu', 'Samples', 'Sampless', 'Samples', 'Samples', 'Samples', 'Samples', 'Samples', 'Samples', 'barna.png', 'a2dc1592be8cd31d4395d016917d941c', 'User', 0, '2023-10-24'),
-(80, 'pass', 'Pass', 'Pass', '', '2023-10-05', '2 weeks old', 'adPassmin@gmail.com', '9359428963', 'Pass', 'Male', 'Single', 'Pass', 'Buddhist', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', '4.jpg', '$2y$10$c6aPaM3e4xYmjogT.5/JzeSWNZIwPSu.0pVQ3cuneDJYmfVkPCdfy', 'Staff', 0, '2023-10-24'),
+(80, 'pass', 'Pass', 'Pass', '', '2023-10-05', '2 weeks old', 'staff2@gmail.com', '9359428963', 'Pass', 'Male', 'Single', 'Pass', 'Buddhist', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', '4.jpg', '$2y$10$c6aPaM3e4xYmjogT.5/JzeSWNZIwPSu.0pVQ3cuneDJYmfVkPCdfy', 'Staff', 0, '2023-10-24'),
 (81, 'New User', 'New User', 'New User', 'New User', '2023-10-05', '2 weeks old', 'admiNewUsern@gmail.com', '9359428963', 'New User', 'Male', 'Single', 'New User', 'Iglesia Ni Cristo', 'New User', 'New User', 'New User', 'New User', 'New User', 'New User', 'New User', 'New User', '1.jpg', 'clement.png', 'User', 0, '2023-10-24'),
 (83, 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdmin', '2023-10-10', '2 weeks old', 'adNewAdminmin@gmail.com', '9359428963', 'NewAdmin', 'Male', 'Married', 'NewAdmin', 'Jehovah''s Witnesses', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'atec.png', '$2y$10$x0N5Mqk7grE.KgkmHC32COLPBjc9vmwycVD.LZ732pz1IeM815S46', 'Admin', 0, '2023-10-24');
 
@@ -371,17 +381,17 @@ MODIFY `cat_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-MODIFY `cust_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=86;
+MODIFY `cust_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `log_history`
 --
 ALTER TABLE `log_history`
-MODIFY `log_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+MODIFY `log_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -391,12 +401,12 @@ MODIFY `prod_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-MODIFY `reserve_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+MODIFY `reserve_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `user_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=85;
+MODIFY `user_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=84;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

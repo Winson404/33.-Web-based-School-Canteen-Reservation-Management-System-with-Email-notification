@@ -281,8 +281,8 @@
                       
                     </div>
                     <div class="tab-pane" id="accountsecurity">
-                      <form action="process_update.php" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" class="form-control" value="<?php echo $row['user_Id']; ?>" name="user_Id">
+                      <form action="../forms/customer_update.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" class="form-control" value="<?php echo $id; ?>" name="user_Id">
                         <div class="form-group row">
                           <label for="Old password" class="col-sm-2 col-form-label">Old password</label>
                           <div class="col-sm-10">

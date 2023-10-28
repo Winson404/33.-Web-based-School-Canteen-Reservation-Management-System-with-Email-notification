@@ -68,15 +68,6 @@
 
 
 
-	// REGISTER USER - REGISTER.PHP 
-	if (isset($_POST['create_user'])) {
-		saveUser($conn, "register.php");
-	}
-
-
-
-
-
 	// SEARCH EMAIL - FORGOT-PASSWORD.PHP
 	if(isset($_POST['search'])) {
       $email = mysqli_real_escape_string($conn, $_POST['email']);

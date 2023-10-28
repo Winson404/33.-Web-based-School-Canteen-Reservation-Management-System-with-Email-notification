@@ -37,8 +37,8 @@ if (isset($_POST['create_admin'])) {
 	$municipality     = $_POST['municipality'];
 	$province         = $_POST['province'];
 	$region           = $_POST['region'];
-	$password         = $_POST['password'];
-	$HashedPassword   = password_hash($password, PASSWORD_BCRYPT);
+	$password         = md5($_POST['password']);
+	// $HashedPassword   = password_hash($password, PASSWORD_BCRYPT);
 	$file             = basename($_FILES["fileToUpload"]["name"]);
 
 	if ($person->check_email_exists($email)) {
@@ -62,7 +62,7 @@ if (isset($_POST['create_admin'])) {
             displayErrorMessage("Your file was not uploaded.", '../Admin/admin_mgmt.php?page=create');
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            	$result = $person->create_user($firstname, $middlename, $lastname, $suffix, $dob, $age, $birthplace, $gender, $civilstatus, $occupation, $religion, $email, $contact, $house_no, $street_name, $purok, $zone, $barangay, $municipality, $province, $region, $file, $HashedPassword, $user_type);
+            	$result = $person->create_user($firstname, $middlename, $lastname, $suffix, $dob, $age, $birthplace, $gender, $civilstatus, $occupation, $religion, $email, $contact, $house_no, $street_name, $purok, $zone, $barangay, $municipality, $province, $region, $file, $password, $user_type);
 			    // var_dump($result);
 			    if($result) {
 			    	displaySaveMessage($result, '../Admin/admin_mgmt.php?page=create');

@@ -152,5 +152,39 @@ if(isset($_POST['update_image_user'])) {
 
 
 
+// CHANGE PASSWORD CUSTOMER
+if (isset($_POST['update_password_user'])) {
+    $cust_Id     = $_POST['user_Id'];
+    $OldPassword = $_POST['OldPassword'];
+    $newPassword = $_POST['password'];
+
+    if (strlen($newPassword) < 8) {
+        displayErrorMessage("New password must be at least 8 characters long.", '../Admin/profile.php');
+    } else {
+        $user = $customer->get_customer($cust_Id);
+        if ($user) {
+            // Verify old password using md5
+            if (md5($OldPassword) === $user['password']) {
+                // Hash the new password using md5 (not recommended)
+                $hashedPassword = md5($newPassword);
+
+                // Update the password in the database
+                $result = $customer->changeAdminPassword($cust_Id, $hashedPassword);
+
+                if ($result) {
+                    displayUpdateMessage($result, "Password has been updated.", '../User/profile.php');
+                } else {
+                    displayErrorMessage("Something went wrong while updating the password.", '../User/profile.php');
+                }
+            } else {
+                displayErrorMessage("Old password is incorrect.", '../User/profile.php');
+            }
+        } else {
+            displayErrorMessage("User not found.", '../User/profile.php');
+        }
+    }
+}
+
+
 
 ?>

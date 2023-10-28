@@ -8,12 +8,14 @@
       </div>
       <div class="card-body">
         <?php
-        if(isset($_GET['user_Id'])) {
+        if(isset($_GET['user_Id']) && isset($_GET['type'])) {
         $user_Id = $_GET['user_Id'];
+        $type    = $_GET['type'];
         ?>
         <p class="login-box-msg">Please check your email for a message with your code. Your code is 6 numbers long.</p>
-        <form action="processes.php" method="POST">
+        <form action="forms/account_recovery.php" method="POST">
           <input type="hidden" class="form-control" name="user_Id" value="<?php echo $user_Id; ?>">
+          <input type="hidden" class="form-control" name="type" value="<?php echo $type; ?>">
           <div class="input-group mb-3">
             <input type="password" class="form-control" placeholder="New password" name="password" id="password" minlength="8">
             <div class="input-group-append">

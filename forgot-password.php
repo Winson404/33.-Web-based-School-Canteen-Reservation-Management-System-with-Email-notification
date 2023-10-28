@@ -8,7 +8,7 @@
       </div>
       <div class="card-body">
         <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
-        <form action="processes.php" method="post">
+        <form action="forms/account_recovery.php" method="post">
           <div class="input-group">
             <input type="email" class="form-control" placeholder="email@gmail.com" name="email"  id="email" onkeydown="validation()" onkeyup="validation()" required>
             <div class="input-group-append">

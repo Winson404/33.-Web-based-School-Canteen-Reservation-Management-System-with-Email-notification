@@ -28,8 +28,20 @@
 	        $stmt->bind_param("s", $email);
 	        $stmt->execute();
 	        $result = $stmt->get_result();
-	        
-	        return $result->num_rows > 0;
+	        if($result->num_rows > 0) {
+	        	return $result->num_rows > 0;
+	        } else {
+	        	$stmt2 = $conn->prepare("SELECT * FROM customer WHERE email = ?");
+		        if (!$stmt2) {
+		            die('Error in SQL query: ' . $conn->error);
+		        }
+		        $stmt2->bind_param("s", $email);
+		        $stmt2->execute();
+		        $result2 = $stmt2->get_result();
+		        if($result2) {
+		        	return $result2->num_rows > 0;
+		        }
+	        }
 	    }
 
 	    // CHECK USER EMAIL FOR UPDATION
@@ -42,8 +54,20 @@
 	        $stmt->bind_param("si", $email, $user_Id);
 	        $stmt->execute();
 	        $result = $stmt->get_result();
-	        
-	        return $result->num_rows > 0;
+	        if($result->num_rows > 0) {
+	        	return $result->num_rows > 0;
+	        } else {
+	        	$stmt2 = $conn->prepare("SELECT * FROM customer WHERE email = ?");
+		        if (!$stmt2) {
+		            die('Error in SQL query: ' . $conn->error);
+		        }
+		        $stmt2->bind_param("s", $email);
+		        $stmt2->execute();
+		        $result2 = $stmt2->get_result();
+		        if($result2) {
+		        	return $result2->num_rows > 0;
+		        }
+	        }
 	    }
 	    
 	    // DISPLAY USER
@@ -121,6 +145,14 @@
 		    $result = $conn->query($query);
 		    $count = $result->num_rows;
 		    return $count;
+		}
+
+		// CHANGE ADMIN PASSWORD
+		public function changeAdminPassword($user_Id, $hashedPassword) {
+			$conn = $this->db->getConnection();
+	        $stmt = $conn->prepare("UPDATE users SET password = ? WHERE user_Id = ?");
+	        $stmt->bind_param("si", $hashedPassword, $user_Id);
+	        return $stmt->execute();
 		}
 	}
 
