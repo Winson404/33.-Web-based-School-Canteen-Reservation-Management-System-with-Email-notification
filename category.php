@@ -20,7 +20,16 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0"> All Food Products</h1>
+            <?php 
+              if(isset($_GET['cat_Id'])) {
+                $cat_Id = $_GET['cat_Id'];
+                $prod = new Product();
+                $product = $prod->get_product_by_category($cat_Id);
+                if($product->num_rows > 0) {
+                 $row=$product->fetch_assoc();
+            ?>
+            <h1 class="m-0"><?= ucwords($row['catName']) ?> Products</h1>
+            <?php } } ?>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -82,8 +91,8 @@
           else { ?>
 
               <div class="text-center d-block m-auto">
-                <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250">
-                <p class="mt-2">Sorry, no results found.</p>
+                <!-- <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250"> -->
+                <p class="mt-2"><i class="fas fa-exclamation-triangle text-warning"></i> Sorry, no results found.</p>
               </div>
           <?php } } /*END OF IF ISSET FUNCTION*/
           else { 
@@ -125,8 +134,8 @@
           else { ?>
 
               <div class="text-center d-block m-auto">
-                <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250">
-                <p class="mt-2">No record found.</p>
+                <!-- <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250"> -->
+                <p class="mt-2"><i class="fas fa-exclamation-triangle text-warning"></i> No record found.</p>
               </div>
 
           <?php } } //END SEARCH  ?>

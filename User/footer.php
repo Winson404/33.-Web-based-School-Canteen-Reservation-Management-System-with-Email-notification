@@ -1,5 +1,21 @@
   
   <?php include '../sweetalert_messages.php'; ?>
+  <!-- /.content-wrapper -->
+  <div class="modal fade" id="approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered p-3">
+      <div class="modal-content">
+         <div class="modal-header bg-light">
+            <img src="../assets/images/ctu-logo copy.jpg" alt="" class="d-block m-auto img-circle img-fluid shadow-sm" width="100">
+        </div>
+        <div class="modal-body p-5">
+            <h6 class="text-center">Your session has timed out. Please login again</h6>
+        </div>
+        <div class="modal-footer alert-light">
+          <a href="../logout.php" type="button" class="btn btn-secondary">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
  <!--  <footer class="main-footer">
     <div class="row p-3">
@@ -60,7 +76,7 @@
     
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["csv", "pdf", "print"]
+      // "buttons": ["csv", "pdf", "print"]
       // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
@@ -88,17 +104,39 @@
 
     // SHOW/HIDE PASSWORDS
     function showPassword() {
-      var x = document.getElementById("mynewpassword");
-      var y = document.getElementById("cpassword");
+      var x = document.getElementById("Old password");
+      var y = document.getElementById("password");
+      var z = document.getElementById("cpassword");
       if (x.type === "password" || y.type === "password") {
         x.type = "text";
         y.type = "text";
+        z.type = "text";
       } else {
         x.type = "password";
         y.type = "password";
+        z.type = "password";
       }
    }
 
+
+    // AUTO LOGOUT AFTER 10 MINS
+    setInterval(function() {
+      var lastActive = <?php echo $_SESSION['last_active']; ?>;
+      var currentTime = new Date().getTime() / 1000;
+      var inactiveTime = currentTime - lastActive;
+      if (inactiveTime > 600) { // inactivity period is 10 seconds
+          
+          $('#approve').modal({
+            backdrop: 'static',
+            keyboard: false
+          }).modal('show');
+
+          setTimeout(function() {
+            window.location.href = '../logout.php';
+          }, 15000); 
+
+      }
+    }, 1000); // check every second
 
     // IMAGE PREVIEW
     function getImagePreview(event) {
@@ -129,7 +167,8 @@
     // EMAIL VALIDATION
     function validation() {
       var email = document.getElementById("email").value;
-      var pattern =/.+@(gmail)\.com$/;
+      var pattern = /.+@(gmail\.com|ctu\.edu\.ph)$/;
+      // var pattern =/.+@(gmail)\.com$/;
       // var pattern =/.+@(gmail|yahoo)\.com$/;
       var form = document.getElementById("form");
 
@@ -141,7 +180,7 @@
       } 
       else {
           document.getElementById('text').style.color = 'red';
-          document.getElementById('text').innerHTML = 'Domain must be @gmail.com';
+          document.getElementById('text').innerHTML = 'Domain must be @gmail.com or ctu.edu.ph';
           document.getElementById('submit_button').disabled = true;
           document.getElementById('submit_button').style.opacity = (0.4);
           

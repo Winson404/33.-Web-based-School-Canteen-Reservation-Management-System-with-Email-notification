@@ -73,7 +73,7 @@
 	    // GET RESERVATION
 	    public function get_reservation($reserve_Id) {
 	        $conn = $this->db->getConnection();
-	        $userId = mysqli_real_escape_string($conn, $userId);
+	        $reserve_Id = mysqli_real_escape_string($conn, $reserve_Id);
 	        $result = $conn->query("SELECT * FROM reservation JOIN product ON reservation.prod_Id=product.prod_Id JOIN category oN product.cat_Id=category.cat_Id JOIN customer ON reservation.cust_Id=customer.cust_Id WHERE reservation.reserve_Id='$reserve_Id' ");
 	        if ($result && $result->num_rows === 1) {
 	            return $result->fetch_assoc();
@@ -144,7 +144,7 @@
 		    // SQL query to calculate the daily income
     		$query = "SELECT IFNULL(SUM(product.price * reservation.qty), 0) AS total_income
               FROM product
-              LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id AND DATE(reservation.date_reserved) = ?";
+              LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id AND DATE(reservation.date_reserved) = ? WHERE reservation.status=2";
 		    
 		    $stmt = $conn->prepare($query);
 		    $stmt->bind_param("s", $date);
@@ -178,7 +178,7 @@
 		    $query = "SELECT IFNULL(SUM(product.price * reservation.qty), 0) AS total_income
 		              FROM product
 		              LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id
-		              WHERE DATE_FORMAT(reservation.date_reserved, '%Y-%m') = ?";
+		              WHERE DATE_FORMAT(reservation.date_reserved, '%Y-%m') = ?  AND reservation.status=2";
 
 		    $targetMonth = sprintf("%04d-%02d", $year, $month); // Format the year and month
 
@@ -212,7 +212,7 @@
 		    // SQL query to calculate the monthly income for a specific year and month
 		    $query = "SELECT IFNULL(SUM(product.price * reservation.qty), 0) AS total_income
 		              FROM product
-		              LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id";
+		              LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id  WHERE reservation.status=2";
 
 
 		    $stmt = $conn->prepare($query);

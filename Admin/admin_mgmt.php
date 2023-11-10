@@ -230,14 +230,14 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
                     <span class="text-dark"><b>Password</b></span>
-                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" minlength="8">
+                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" minlength="8"  style="text-transform: none;">
                     <span id="password-message" class="text-bold" style="font-style: italic;font-size: 12px;color: #e60000;"></span>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
                     <span class="text-dark"><b>Confirm password</b></span>
-                    <input type="password" class="form-control" name="cpassword" placeholder="Retype password" id="cpassword" onkeyup="validate_password()" required minlength="8">
+                    <input type="password" class="form-control" name="cpassword" placeholder="Retype password" id="cpassword" onkeyup="validate_password()" required minlength="8"  style="text-transform: none;">
                     <small id="wrong_pass_alert" class="text-bold" style="font-style: italic;font-size: 12px;"></small>
                   </div>
                 </div>

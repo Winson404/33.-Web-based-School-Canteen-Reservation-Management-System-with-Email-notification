@@ -1,7 +1,7 @@
 <?php 
 
 	include 'includes/config.php';
-	include 'includes/function_create.php';
+	// include 'includes/function_create.php';
 
 	// use PHPMailer\PHPMailer\PHPMailer;
     // use PHPMailer\PHPMailer\Exception;

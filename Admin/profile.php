@@ -366,22 +366,28 @@ require_once 'sidebar.php';
                       <div class="form-group row">
                         <label for="Old password" class="col-sm-2 col-form-label">Old password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" id="Old password" placeholder="Old password" name="OldPassword" required minlength="8">
+                          <input type="password" class="form-control" id="Old password" placeholder="Old password" name="OldPassword" required minlength="8" style="text-transform: none;">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="new_password" class="col-sm-2 col-form-label">New password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" placeholder="Password" name="password" required id="password" minlength="8">
+                          <input type="password" class="form-control" placeholder="Password" name="password" required id="password" minlength="8" style="text-transform: none;">
                           <span id="password-message" class="text-bold" style="font-style: italic;font-size: 12px;color: #e60000;"></span>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="cpassword" class="col-sm-2 col-form-label">Confirm password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" placeholder="Confirm password" name="cpassword" required id="cpassword" onkeyup="validate_password()" minlength="8">
+                          <input type="password" class="form-control" placeholder="Confirm password" name="cpassword" required id="cpassword" onkeyup="validate_password()" minlength="8" style="text-transform: none;">
                           <small id="wrong_pass_alert" class="text-bold" style="font-style: italic;font-size: 12px;"></small>
                         </div>
+                      </div>
+                      <div class="icheck-primary mt-3">
+                        <input type="checkbox" id="remember" onclick="showPassword()">
+                        <label for="remember">
+                          Show password
+                        </label>
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">

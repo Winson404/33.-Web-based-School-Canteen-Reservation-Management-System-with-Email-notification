@@ -27,9 +27,9 @@
     body {
     font-family: 'Roboto', sans-serif;
     }
-    .form-control:not([type="email"]):not([type="password"]) {
+    /*.form-control:not([type="email"]):not([type="password"]) {
     text-transform: capitalize;
-    }
+    }*/
     </style>
   </head>
   <body class="hold-transition layout-top-nav">
@@ -48,7 +48,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a href="index.php" class="nav-link">All products</a>
+                <a href="allproducts.php" class="nav-link">All products</a>
               </li>
               <li class="nav-item dropdown ">
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Categories</a>
@@ -68,6 +68,9 @@
                 </ul>
               </li>
             </ul>
+          <?php 
+            $current_page = basename($_SERVER['PHP_SELF']);
+            if ($current_page !== 'login.php' AND $current_page !== 'index.php') { ?>
             <!-- SEARCH FORM -->
             <form class="form-inline ml-0 ml-md-3 mb-0" action="" method="POST">
               <div class="input-group input-group-sm">
@@ -79,6 +82,7 @@
                 </div>
               </div>
             </form>
+          <?php } ?>
           </div>
           <!-- Right navbar links -->
           <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">

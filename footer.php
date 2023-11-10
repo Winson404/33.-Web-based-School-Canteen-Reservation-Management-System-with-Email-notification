@@ -88,7 +88,9 @@
     // EMAIL VALIDATION
     function validation() {
       var email = document.getElementById("email").value;
-      var pattern =/.+@(gmail)\.com$/;
+      var pattern = /.+@(gmail\.com|ctu\.edu\.ph)$/;
+
+      // var pattern =/.+@(gmail)\.com$/;
       // var pattern =/.+@(gmail|yahoo)\.com$/;
       var form = document.getElementById("form");
 
@@ -100,7 +102,7 @@
       } 
       else {
           document.getElementById('text').style.color = 'red';
-          document.getElementById('text').innerHTML = 'Domain must be @gmail.com';
+          document.getElementById('text').innerHTML = 'Domain must be @gmail.com or ctu.edu.ph';
           document.getElementById('submit_button').disabled = true;
           document.getElementById('submit_button').style.opacity = (0.4);
           

@@ -1,133 +1,54 @@
-<title>Web-based School Canteen Reservation Management System | Food Products information</title>
-<?php 
-    require_once 'header.php'; 
-    require_once 'classes/product.php';
-?>
-<style>
-  .card-body .img img {
-    height: 200px; /* set a fixed height */
-    object-fit: cover; /* use "cover" to scale the image while maintaining aspect ratio */
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web-based School Canteen Reservation Management System | Food Products Information</title>
+  <?php 
+  require_once 'header.php'; 
+  require_once 'classes/product.php';
+  ?>
+  <style>
+    .cover-image {
+      background-image: url('assets/images/canteen.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
 
-  .card-body .product-image {
-    height: 200px; /* set a fixed height */
-    object-fit: cover; /* use "cover" to scale the image while maintaining aspect ratio */
-  }
-</style>
+    .cover-image::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust the last value (0.5) for opacity */
+    }
 
-  <div class="content-wrapper">
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0"> All Food Products</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Food Product info</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
+    .cover-text {
+      font-size: 45px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
 
-    <!-- Main content -->
-    <div class="content">
-      <div class="container">
-        <div class="row d-flex justify-content-start">
-          <?php 
-            if(isset($_POST['search_button'])) {
-              $search_product = $_POST['search_product'];
-              $prod = new Product();
-              $product = $prod->display_product_search($search_product);
-              if (count($product) > 0) {
-                foreach ($product as $row) {
-          ?>
-                  <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                      <div class="card bg-light d-flex flex-fill">
-                        <div class="card-header text-muted border-bottom-0">
-                        </div>
-                        <a href="product_view.php?prod_Id=<?php echo $row['prod_Id']; ?>">
-                          <div class="card-body" style="margin-bottom: -30px;">
-                            <div class="img">
-                              <img src="assets/images-product/<?php echo $row['prod_image']; ?>" alt="" class="img-fluid product-image">
-                            </div>
-                            <p>
-                              <?php echo ucwords($row['prod_name']); ?><br> 
-                              <span class="text-sm text-danger">₱<?php echo number_format($row['price'], 2, '.', ','); ?></span> <br>
-                            </p>
-                          </div>
-                        </a>
-                        <div class="card-footer">
-                          <a href="login.php" class="btn btn-info btn-sm"><i class="fas fa-cart-plus fa-lg"></i> Reserve</a>
-                        </div>
-                      </div>
-                  </div>
-
-          <?php } //END OF WHILE LOOP ?>  
-
-                <div class="col-12 text-center mt-3">
-                  <p>You have reached the end of the list</p>
-                  <hr>
-                </div> 
-                
-          <?php  } /*END OF IF MYSQLI_NUM_ROWS > 0*/
-          else { ?>
-
-              <div class="text-center d-block m-auto">
-                <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250">
-                <p class="mt-2">Sorry, no results found.</p>
-              </div>
-          <?php } } /*END OF IF ISSET FUNCTION*/
-          else { 
-         
-            $prod = new Product();
-            $product = $prod->display_product();
-            if($product->num_rows > 0) {
-              while($row=$product->fetch_assoc()) {
-          ?>
-                  <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                      <div class="card bg-light d-flex flex-fill">
-                        <div class="card-header text-muted border-bottom-0">
-                        </div>
-                        <a href="product_view.php?prod_Id=<?php echo $row['prod_Id']; ?>">
-                          <div class="card-body" style="margin-bottom: -30px;">
-                            <div class="img">
-                              <img src="assets/images-product/<?php echo $row['prod_image']; ?>" alt="" class="img-fluid product-image">
-                            </div>
-                            <p>
-                              <?php echo ucwords($row['prod_name']); ?><br>
-                              <span class="text-sm text-danger">₱<?php echo number_format($row['price'], 2, '.', ','); ?></span> <br>
-                            </p>
-                          </div>
-                        </a>
-                        <div class="card-footer">
-                          <a href="login.php" class="btn btn-info btn-sm"><i class="fas fa-cart-plus fa-lg"></i> Reserve</a>
-                        </div>
-                      </div>
-                  </div>
-
-          <?php } //END OF WHILE LOOP ?>  
-
-                <div class="col-12 text-center mt-3">
-                  <p>You have reached the end of the list</p>
-                  <hr>
-                </div> 
-                
-          <?php  } /*END OF IF MYSQLI_NUM_ROWS > 0*/
-          else { ?>
-
-              <div class="text-center d-block m-auto">
-                <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250">
-                <p class="mt-2">No record found.</p>
-              </div>
-
-          <?php } } //END SEARCH  ?>
-
-        </div>
-      </div>
+  <div class="cover-image">
+    <div class="cover-text text-white">
+      <b>School Canteen Reservation System</b>
     </div>
   </div>
-  
-<?php include 'footer.php'; ?>
+
+  <?php include 'footer.php'; ?>
+</body>
+</html>

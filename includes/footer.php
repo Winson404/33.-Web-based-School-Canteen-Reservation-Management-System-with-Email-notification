@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-dialog-centered p-3">
       <div class="modal-content">
          <div class="modal-header bg-light">
-            <img src="../assets/dist/img/AdminLTELogo.png" alt="" class="d-block m-auto img-circle img-fluid shadow-sm" width="100">
+            <img src="../assets/images/ctu-logo copy.jpg" alt="" class="d-block m-auto img-circle img-fluid shadow-sm" width="100">
         </div>
         <div class="modal-body p-5">
             <h6 class="text-center">Your session has timed out. Please login again</h6>
@@ -129,6 +129,22 @@
 
 
 
+  // SHOW/HIDE PASSWORDS
+    function showPassword() {
+      var x = document.getElementById("Old password");
+      var y = document.getElementById("password");
+      var z = document.getElementById("cpassword");
+      if (x.type === "password" || y.type === "password") {
+        x.type = "text";
+        y.type = "text";
+        z.type = "text";
+      } else {
+        x.type = "password";
+        y.type = "password";
+        z.type = "password";
+      }
+   }
+
 
   // AUTO LOGOUT AFTER 10 MINS
   setInterval(function() {
@@ -183,7 +199,8 @@
   // EMAIL VALIDATION
   function validation() {
     var email = document.getElementById("email").value;
-    var pattern =/.+@(gmail)\.com$/;
+    var pattern = /.+@(gmail\.com|ctu\.edu\.ph)$/;
+    // var pattern =/.+@(gmail)\.com$/;
     // var pattern =/.+@(gmail|yahoo)\.com$/;
     var form = document.getElementById("form");
 
@@ -195,7 +212,7 @@
     } 
     else {
         document.getElementById('text').style.color = 'red';
-        document.getElementById('text').innerHTML = 'Domain must be @gmail.com';
+        document.getElementById('text').innerHTML = 'Domain must be @gmail.com or ctu.edu.ph';
         document.getElementById('submit_button').disabled = true;
         document.getElementById('submit_button').style.opacity = (0.4);
         

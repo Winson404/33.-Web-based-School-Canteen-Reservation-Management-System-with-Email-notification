@@ -1,7 +1,7 @@
 <title>Web-based School Canteen Reservation Management System | Food Products information</title>
 <?php 
     require_once 'header.php'; 
-    require_once '../classes/product.php';
+    require_once 'classes/product.php';
 ?>
 <style>
   .card-body .img img {
@@ -20,16 +20,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <?php 
-              if(isset($_GET['cat_Id'])) {
-                $cat_Id = $_GET['cat_Id'];
-                $prod = new Product();
-                $product = $prod->get_product_by_category($cat_Id);
-                if($product->num_rows > 0) {
-                 $row=$product->fetch_assoc();
-            ?>
-            <h1 class="m-0"><?= ucwords($row['catName']) ?> Products</h1>
-            <?php } } ?>
+            <h1 class="m-0"> All Food Products</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -44,12 +35,6 @@
     <!-- Main content -->
     <div class="content">
       <div class="container">
-
-        <?php 
-          if(isset($_GET['cat_Id'])) {
-            $cat_Id = $_GET['cat_Id'];
-        ?>
-
         <div class="row d-flex justify-content-start">
           <?php 
             if(isset($_POST['search_button'])) {
@@ -66,7 +51,7 @@
                         <a href="product_view.php?prod_Id=<?php echo $row['prod_Id']; ?>">
                           <div class="card-body" style="margin-bottom: -30px;">
                             <div class="img">
-                              <img src="../assets/images-product/<?php echo $row['prod_image']; ?>" alt="" class="img-fluid product-image">
+                              <img src="assets/images-product/<?php echo $row['prod_image']; ?>" alt="" class="img-fluid product-image">
                             </div>
                             <p>
                               <?php echo ucwords($row['prod_name']); ?><br> 
@@ -75,14 +60,7 @@
                           </div>
                         </a>
                         <div class="card-footer">
-                          <form action="../forms/reservation_create.php" method="POST">
-                            <div class="d-flex justify-content-between align-items-center">
-                              <button type="submit" class="btn btn-info btn-sm" name="reserve_button"><i class="fas fa-cart-plus fa-lg"></i> Reserve</button>
-                              <input type="hidden" class="form-control text-center" value="<?= $id; ?>" required name="cust_Id">
-                              <input type="hidden" class="form-control text-center" value="<?= $row['prod_Id']; ?>" required name="prod_Id">
-                              <input type="number" min="1" class="form-control text-center" placeholder="qty" style="width: 90px;" name="qty" required>
-                            </div>
-                          </form>
+                          <a href="login.php" class="btn btn-info btn-sm"><i class="fas fa-cart-plus fa-lg"></i> Reserve</a>
                         </div>
                       </div>
                   </div>
@@ -98,14 +76,14 @@
           else { ?>
 
               <div class="text-center d-block m-auto">
-                <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250">
-                <p class="mt-2">Sorry, no results found.</p>
+                <!-- <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250"> -->
+                <p class="mt-2"><i class="fas fa-exclamation-triangle text-warning"></i> Sorry, no results found.</p>
               </div>
           <?php } } /*END OF IF ISSET FUNCTION*/
           else { 
          
             $prod = new Product();
-            $product = $prod->get_product_by_category($cat_Id);
+            $product = $prod->display_product();
             if($product->num_rows > 0) {
               while($row=$product->fetch_assoc()) {
           ?>
@@ -116,7 +94,7 @@
                         <a href="product_view.php?prod_Id=<?php echo $row['prod_Id']; ?>">
                           <div class="card-body" style="margin-bottom: -30px;">
                             <div class="img">
-                              <img src="../assets/images-product/<?php echo $row['prod_image']; ?>" alt="" class="img-fluid product-image">
+                              <img src="assets/images-product/<?php echo $row['prod_image']; ?>" alt="" class="img-fluid product-image">
                             </div>
                             <p>
                               <?php echo ucwords($row['prod_name']); ?><br>
@@ -125,14 +103,7 @@
                           </div>
                         </a>
                         <div class="card-footer">
-                          <form action="../forms/reservation_create.php" method="POST">
-                            <div class="d-flex justify-content-between align-items-center">
-                              <button type="submit" class="btn btn-info btn-sm" name="reserve_button"><i class="fas fa-cart-plus fa-lg"></i> Reserve</button>
-                              <input type="hidden" class="form-control text-center" value="<?= $id; ?>" required name="cust_Id">
-                              <input type="hidden" class="form-control text-center" value="<?= $row['prod_Id']; ?>" required name="prod_Id">
-                              <input type="number" min="1" class="form-control text-center" placeholder="qty" style="width: 90px;" name="qty" required>
-                            </div>
-                          </form>
+                          <a href="login.php" class="btn btn-info btn-sm"><i class="fas fa-cart-plus fa-lg"></i> Reserve</a>
                         </div>
                       </div>
                   </div>
@@ -148,16 +119,13 @@
           else { ?>
 
               <div class="text-center d-block m-auto">
-                <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250">
-                <p class="mt-2">No record found.</p>
+                <!-- <img src="images/hack-khaby.gif" alt="No results found" class="img-fluid" width="250"> -->
+                <p class="mt-2"><i class="fas fa-exclamation-triangle text-warning"></i>  No record found.</p>
               </div>
 
           <?php } } //END SEARCH  ?>
 
         </div>
-
-        <?php } else { require_once '404.php'; } ?>
-
       </div>
     </div>
   </div>

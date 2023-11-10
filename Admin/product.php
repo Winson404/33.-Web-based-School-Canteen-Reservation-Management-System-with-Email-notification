@@ -43,7 +43,6 @@
                       <th>PRODUCT NAME</th>
                       <th>PRICE</th>
                       <th>PREPARATION TIME</th>
-                      <th>DATE ADDED</th>
                       <th>TOOLS</th>
                     </tr>
                   </thead>
@@ -63,7 +62,6 @@
                       <td><?= $row['prod_name'] ?></td>
                       <td><?= '₱' . number_format($row['price'], 2) ?></td>
                       <td><?= $row['preparation_time'] ?></td>
-                      <td class="text-primary"><?= date("F d, Y h:i:s A", strtotime($row['date_added'])) ?></td>
                       <td>
                         <a class="btn btn-primary btn-sm" href="product_view.php?prod_Id=<?php echo $row['prod_Id']; ?>"><i class="fas fa-folder"></i> View</a>
                         <a class="btn btn-info btn-sm" href="product_mgmt.php?page=<?php echo $row['prod_Id']; ?>"><i class="fas fa-pencil-alt"></i> Edit</a>

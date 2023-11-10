@@ -41,7 +41,7 @@ if (isset($_POST['update_product'])) {
             if ($check == false) {
                 displayErrorMessage("File is not an image.", '../Admin/product_mgmt.php?page='.$prod_Id);
                 $uploadOk = 0;
-            } elseif ($_FILES["fileToUpload"]["size"] > 500000) {
+            } elseif ($_FILES["fileToUpload"]["size"] > 1000000) {
                 displayErrorMessage("File must be up to 500KB in size.", '../Admin/product_mgmt.php?page='.$prod_Id);
                 $uploadOk = 0;
             } elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {

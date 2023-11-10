@@ -63,7 +63,7 @@ if (isset($_POST['update_status_reservation'])) {
                
             } catch (Exception $e) {
                 echo"<script>alert('Membership status has been approved but Mailer Error: ".$mail->ErrorInfo." ')</script>";
-                echo"<script>window.location='../Admin/borrower.php'</script>";
+                echo"<script>window.location='../Admin/reservation.php'</script>";
             } 
         } else {
             displayUpdateMessage($result, "Record has been updated.", '../Admin/reservation.php');
