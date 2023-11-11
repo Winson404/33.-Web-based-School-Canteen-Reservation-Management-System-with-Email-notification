@@ -48,7 +48,7 @@
 	}
 
 	// FUNCTION TO HANDLE SUCCESS MESSAGES 
-	function displayUpdateMessage($updateStatus, $message = "Record has been updated.", $page, $urlForError) {
+	function displayUpdateMessage($updateStatus, $message, $page) {
 		if ($updateStatus) {
 			$_SESSION['message'] = $message;
 			$_SESSION['text'] = "Updated successfully!";
@@ -59,7 +59,7 @@
 			$_SESSION['message'] = "Error.";
 			$_SESSION['text'] = "Please try again.";
 			$_SESSION['status'] = "error";
-			header("Location: $urlForError");
+			header("Location: $page");
 			exit();
 		}
 	}

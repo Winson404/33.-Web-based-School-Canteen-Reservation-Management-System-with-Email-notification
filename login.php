@@ -6,7 +6,7 @@
       <div class="card-header text-center">
         <!-- <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a> -->
         <a href="login.php" class="h1">
-          <img src="assets/dist/img/AdminLTELogo.png" alt="logo" class="img-fluid shadow-sm img-circle">
+          <img src="assets/images/ctu-logo copy.jpg" alt="logo" class="img-fluid shadow-sm img-circle">
         </a>
       </div>
       <div class="card-body">

@@ -1,20 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
--- http://www.phpmyadmin.net
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2023 at 12:48 PM
--- Server version: 5.6.20
--- PHP Version: 5.5.15
+-- Generation Time: Nov 11, 2023 at 02:57 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `reservation`
@@ -26,12 +27,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `announcement`
 --
 
-CREATE TABLE IF NOT EXISTS `announcement` (
-`actId` int(11) NOT NULL,
+CREATE TABLE `announcement` (
+  `actId` int(11) NOT NULL,
   `actName` text NOT NULL,
   `actDate` varchar(20) NOT NULL,
   `date_added` varchar(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `announcement`
@@ -59,12 +60,12 @@ INSERT INTO `announcement` (`actId`, `actName`, `actDate`, `date_added`) VALUES
 -- Table structure for table `category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
-`cat_Id` int(11) NOT NULL,
+CREATE TABLE `category` (
+  `cat_Id` int(11) NOT NULL,
   `catName` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `date_added` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `category`
@@ -76,7 +77,7 @@ INSERT INTO `category` (`cat_Id`, `catName`, `description`, `date_added`) VALUES
 (4, 'Food 3', 'Food 3 Description', '2023-10-25 01:58:03'),
 (5, 'Food 4', 'Food 4 Description', '2023-10-25 01:58:12'),
 (6, 'Food 5', 'Food 5 Description', '2023-10-25 01:58:22'),
-(7, 'Cat 1', 'Cat food 1', '2023-11-05 12:35:27');
+(7, 'Category 1', 'Cat food 1s', '2023-11-05 12:35:27');
 
 -- --------------------------------------------------------
 
@@ -84,8 +85,8 @@ INSERT INTO `category` (`cat_Id`, `catName`, `description`, `date_added`) VALUES
 -- Table structure for table `customer`
 --
 
-CREATE TABLE IF NOT EXISTS `customer` (
-`cust_Id` int(11) NOT NULL,
+CREATE TABLE `customer` (
+  `cust_Id` int(11) NOT NULL,
   `user_type` varchar(50) NOT NULL DEFAULT 'User',
   `yr_section` varchar(100) NOT NULL,
   `teacherPosition` varchar(50) NOT NULL,
@@ -104,14 +105,14 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `image` varchar(255) NOT NULL,
   `verification_code` int(11) NOT NULL,
   `date_registered` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`cust_Id`, `user_type`, `yr_section`, `teacherPosition`, `firstname`, `middlename`, `lastname`, `suffix`, `dob`, `age`, `gender`, `civilstatus`, `email`, `contact`, `address`, `password`, `image`, `verification_code`, `date_registered`) VALUES
-(85, 'Teacher', '', 'Teacher', 'Teacher', 'Teacher', 'Teacher', '', '2020-01-29', '3 years old', 'Male', 'Single', 'customer2@gmail.com', '9359428963', 'Teacher', '0192023a7bbd73250516f069df18b500', 'aisat.png', 0, '2023-10-27 22:38:05');
+(85, 'Teacher', '', 'Teacher', 'Teachers', 'Teacher', 'Teacher', '', '2020-01-29', '3 years old', 'Male', 'Single', 'customer2@gmail.com', '9359428963', 'Teachers\r\n', '0192023a7bbd73250516f069df18b500', '65280362e930c.jpg', 0, '2023-10-27 22:38:05');
 
 -- --------------------------------------------------------
 
@@ -119,11 +120,11 @@ INSERT INTO `customer` (`cust_Id`, `user_type`, `yr_section`, `teacherPosition`,
 -- Table structure for table `income`
 --
 
-CREATE TABLE IF NOT EXISTS `income` (
-`Id` int(11) NOT NULL,
+CREATE TABLE `income` (
+  `Id` int(11) NOT NULL,
   `reserve_Id` int(11) NOT NULL,
   `date_added` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `income`
@@ -137,7 +138,8 @@ INSERT INTO `income` (`Id`, `reserve_Id`, `date_added`) VALUES
 (5, 11, '2023-10-28 13:50:30'),
 (6, 32, '2023-11-05 12:45:39'),
 (7, 1, '2023-11-06 21:07:59'),
-(8, 2, '2023-11-06 21:10:38');
+(8, 2, '2023-11-06 21:10:38'),
+(9, 3, '2023-11-11 10:39:07');
 
 -- --------------------------------------------------------
 
@@ -145,12 +147,12 @@ INSERT INTO `income` (`Id`, `reserve_Id`, `date_added`) VALUES
 -- Table structure for table `log_history`
 --
 
-CREATE TABLE IF NOT EXISTS `log_history` (
-`log_Id` int(11) NOT NULL,
+CREATE TABLE `log_history` (
+  `log_Id` int(11) NOT NULL,
   `user_Id` int(11) NOT NULL,
   `login_time` varchar(100) NOT NULL,
   `logout_time` varchar(100) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `log_history`
@@ -216,7 +218,10 @@ INSERT INTO `log_history` (`log_Id`, `user_Id`, `login_time`, `logout_time`) VAL
 (57, 66, '2023-11-07 10:30 PM', ''),
 (58, 66, '2023-11-10 03:41 PM', ''),
 (59, 66, '2023-11-10 04:39 PM', ''),
-(60, 66, '2023-11-10 04:42 PM', '');
+(60, 66, '2023-11-10 04:42 PM', ''),
+(61, 73, '2023-11-11 10:27 AM', ''),
+(62, 85, '2023-11-11 10:38 AM', ''),
+(63, 66, '2023-11-11 10:38 AM', '');
 
 -- --------------------------------------------------------
 
@@ -224,8 +229,8 @@ INSERT INTO `log_history` (`log_Id`, `user_Id`, `login_time`, `logout_time`) VAL
 -- Table structure for table `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
-`prod_Id` int(11) NOT NULL,
+CREATE TABLE `product` (
+  `prod_Id` int(11) NOT NULL,
   `cat_Id` int(11) NOT NULL,
   `prod_name` varchar(100) NOT NULL,
   `prod_description` text NOT NULL,
@@ -235,9 +240,9 @@ CREATE TABLE IF NOT EXISTS `product` (
   `nutritional_info` text NOT NULL,
   `preparation_time` varchar(50) NOT NULL,
   `prod_image` varchar(255) NOT NULL,
-  `prod_status` int(11) NOT NULL DEFAULT '1' COMMENT '0=Unavailable, 1=Available',
+  `prod_status` int(11) NOT NULL DEFAULT 1 COMMENT '0=Unavailable, 1=Available',
   `date_added` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `product`
@@ -275,7 +280,7 @@ INSERT INTO `product` (`prod_Id`, `cat_Id`, `prod_name`, `prod_description`, `pr
 (34, 7, 'Nilagang Baka + Patis with Calamansi', 'N/A', 50, 5, 'N/A', 'N/A', '1hr', '211306857_189111536557734_6195363516529121624_n.jpg', 1, '2023-11-10 16:27:11'),
 (35, 7, 'Vegan Pasta', 'N/A', 35, 5, 'N/A', 'N/A', '1hr', '212973033_189111663224388_8613556631265303359_n.jpg', 1, '2023-11-10 16:28:13'),
 (36, 7, 'Sardines with Pechay', 'N/A', 30, 5, '1 bulb Garlic\r\n1 bundle Pechay\r\n1 can small sardines\r\nSalt and Pepper to taste', 'N/A', '30 Mins', '215004656_189133333222221_8565897117541585307_n.jpg', 1, '2023-11-10 16:29:22'),
-(37, 7, 'Sizzling Tofu', '* Prepare the sauce by combining all the sauce ingredients. Mix well. Set aside.\r\n* Heat oil in a pot.\r\n* Once the oil gets hot, deep fry the cubed tofu until it turns light brown. Remove from the pot and place in a plate with paper towel. Set aside\r\n* Scoop 3 tablespoons cooking oil from the pot where the tofu was fried. Heat it in a separate clean pot.\r\n* Saute onion and bell peppers.\r\n* Add the fried tofu. Cook for 2 minutes.\r\n* Pour half of the sauce mixture into the pot. Stir and continue to cook for 2 minutes.\r\n* Serve. Share and enjoy!\r\n\r\n* Optional: Heat a sizzling plate on the stovetop. Melt butter into the plate. Transfer cooked tofu on the metal plate and pour the remaining sauce. Toss and cook for 1 minute.', 50, 5, '* 14 Oz. Extra Firm Tofu Cubed\r\n* 2 Tablespoons Chopped Red Bell Pepper\r\n* 2 Tablespoons Chopped Green Bell Pepper\r\n* 1 Medium Yellow Onion Chopped\r\n* 1 Tablespoon Butter\r\n* 2 Cups Cooking Oil\r\nSauce\r\n* 1/4 Cup Lady''s Choice Mayonnaise\r\n* 1 Tablespoon Knorr Liquid Seasoning\r\n* 1/2 Teaspoon Onion Powder\r\n* 2 Tablespoons Water', 'N/A', '2hrs', '208258275_189134116555476_4313807113519734204_n.jpg', 1, '2023-11-10 16:31:55');
+(37, 7, 'Sizzling Tofu', '* Prepare the sauce by combining all the sauce ingredients. Mix well. Set aside.\r\n* Heat oil in a pot.\r\n* Once the oil gets hot, deep fry the cubed tofu until it turns light brown. Remove from the pot and place in a plate with paper towel. Set aside\r\n* Scoop 3 tablespoons cooking oil from the pot where the tofu was fried. Heat it in a separate clean pot.\r\n* Saute onion and bell peppers.\r\n* Add the fried tofu. Cook for 2 minutes.\r\n* Pour half of the sauce mixture into the pot. Stir and continue to cook for 2 minutes.\r\n* Serve. Share and enjoy!\r\n\r\n* Optional: Heat a sizzling plate on the stovetop. Melt butter into the plate. Transfer cooked tofu on the metal plate and pour the remaining sauce. Toss and cook for 1 minute.', 50, 5, '* 14 Oz. Extra Firm Tofu Cubed\r\n* 2 Tablespoons Chopped Red Bell Pepper\r\n* 2 Tablespoons Chopped Green Bell Pepper\r\n* 1 Medium Yellow Onion Chopped\r\n* 1 Tablespoon Butter\r\n* 2 Cups Cooking Oil\r\nSauce\r\n* 1/4 Cup Lady\'s Choice Mayonnaise\r\n* 1 Tablespoon Knorr Liquid Seasoning\r\n* 1/2 Teaspoon Onion Powder\r\n* 2 Tablespoons Water', 'N/A', '2hrs', '208258275_189134116555476_4313807113519734204_n.jpg', 1, '2023-11-10 16:31:55');
 
 -- --------------------------------------------------------
 
@@ -283,14 +288,14 @@ INSERT INTO `product` (`prod_Id`, `cat_Id`, `prod_name`, `prod_description`, `pr
 -- Table structure for table `reservation`
 --
 
-CREATE TABLE IF NOT EXISTS `reservation` (
-`reserve_Id` int(11) NOT NULL,
+CREATE TABLE `reservation` (
+  `reserve_Id` int(11) NOT NULL,
   `cust_Id` int(11) NOT NULL,
   `prod_Id` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0=Pending, 1=Approved, 2=Delivered, 3=Unavailable',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=Pending, 1=Approved, 2=Delivered, 3=Unavailable',
   `date_reserved` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `reservation`
@@ -298,7 +303,9 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 
 INSERT INTO `reservation` (`reserve_Id`, `cust_Id`, `prod_Id`, `qty`, `status`, `date_reserved`) VALUES
 (1, 85, 2, 2, 1, '2023-11-06 21:06:15'),
-(2, 85, 1, 3, 1, '2023-11-06 21:06:18');
+(2, 85, 1, 3, 1, '2023-11-06 21:06:18'),
+(3, 85, 6, 1, 2, '2023-11-11 10:38:35'),
+(4, 85, 7, 2, 0, '2023-11-11 10:38:39');
 
 -- --------------------------------------------------------
 
@@ -306,8 +313,8 @@ INSERT INTO `reservation` (`reserve_Id`, `cust_Id`, `prod_Id`, `qty`, `status`, 
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-`user_Id` int(11) NOT NULL,
+CREATE TABLE `users` (
+  `user_Id` int(11) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `middlename` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -334,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_type` varchar(50) NOT NULL DEFAULT 'User',
   `verification_code` int(11) NOT NULL,
   `date_registered` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=84 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -342,11 +349,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`user_Id`, `firstname`, `middlename`, `lastname`, `suffix`, `dob`, `age`, `email`, `contact`, `birthplace`, `gender`, `civilstatus`, `occupation`, `religion`, `house_no`, `street_name`, `purok`, `zone`, `barangay`, `municipality`, `province`, `region`, `image`, `password`, `user_type`, `verification_code`, `date_registered`) VALUES
 (66, 'Admins', 'Admin', 'Admin', 'Admin', '2023-10-11', '1 week old', 'admin@gmail.com', '9359428963', 'Female', 'Male', 'Single', 'Admin', 'United Church of Christ in the Philippines', 'dsa', 'Admin', 'Admin', 'dsa', 'Admin', 'Admin', 'Admin', 'Admin', 'aics.jpg', '0192023a7bbd73250516f069df18b500', 'Admin', 374025, '2022-11-25'),
-(73, 'Sampleddd', 'Sample', 'Sample', '', '2023-10-02', '1 week old', 'sonerwin12@gmail.com', '9359428963', 'Sample', 'Female', 'Single', 'Sample', 'Methodist', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', '', '0192023a7bbd73250516f069df18b500', 'Admin', 276649, '2023-10-10'),
+(73, 'Sampleddd', 'Sample', 'Sample', '', '2023-10-02', '1 week old', 'sonerwin12@gmail.com', '9359428963', 'Sample', 'Female', 'Single', 'Sample', 'Methodist', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', '652803dc1801c.jpg', '0192023a7bbd73250516f069df18b500', 'Admin', 276649, '2023-10-10'),
 (79, 'Samples', 'Samples', 'Samples', 'Samples', '2022-03-02', '1 year old', 'admSampleinsss@gmail.com', '9359428962', 'Samples', 'Female', 'Single', 'Samples', 'Hindu', 'Samples', 'Sampless', 'Samples', 'Samples', 'Samples', 'Samples', 'Samples', 'Samples', 'barna.png', 'a2dc1592be8cd31d4395d016917d941c', 'User', 0, '2023-10-24'),
 (80, 'gfdgdf', '', 'Passgf', '', '1998-06-09', '25 years old', 'staff2hgf@gmail.com', '9359428963', 'Passhgfhf', 'Male', 'Single', 'Pass', 'Buddhist', 'NA', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass', '4.jpg', '$2y$10$c6aPaM3e4xYmjogT.5/JzeSWNZIwPSu.0pVQ3cuneDJYmfVkPCdfy', 'Staff', 0, '2023-10-24'),
 (81, 'New User', 'New User', 'New User', 'New User', '2023-10-05', '2 weeks old', 'admiNewUsern@gmail.com', '9359428963', 'New User', 'Male', 'Single', 'New User', 'Iglesia Ni Cristo', 'New User', 'New User', 'New User', 'New User', 'New User', 'New User', 'New User', 'New User', '1.jpg', 'clement.png', 'User', 0, '2023-10-24'),
-(83, 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdmin', '2023-10-10', '2 weeks old', 'adNewAdminmin@gmail.com', '9359428963', 'NewAdmin', 'Male', 'Married', 'NewAdmin', 'Jehovah''s Witnesses', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'atec.png', '$2y$10$x0N5Mqk7grE.KgkmHC32COLPBjc9vmwycVD.LZ732pz1IeM815S46', 'Admin', 0, '2023-10-24');
+(83, 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdmin', '2023-10-10', '2 weeks old', 'adNewAdminmin@gmail.com', '9359428963', 'NewAdmin', 'Male', 'Married', 'NewAdmin', 'Jehovah\'s Witnesses', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'NewAdminNewAdmin', 'NewAdmin', 'atec.png', '$2y$10$x0N5Mqk7grE.KgkmHC32COLPBjc9vmwycVD.LZ732pz1IeM815S46', 'Admin', 0, '2023-10-24');
 
 --
 -- Indexes for dumped tables
@@ -356,49 +363,49 @@ INSERT INTO `users` (`user_Id`, `firstname`, `middlename`, `lastname`, `suffix`,
 -- Indexes for table `announcement`
 --
 ALTER TABLE `announcement`
- ADD PRIMARY KEY (`actId`);
+  ADD PRIMARY KEY (`actId`);
 
 --
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
- ADD PRIMARY KEY (`cat_Id`);
+  ADD PRIMARY KEY (`cat_Id`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
- ADD PRIMARY KEY (`cust_Id`);
+  ADD PRIMARY KEY (`cust_Id`);
 
 --
 -- Indexes for table `income`
 --
 ALTER TABLE `income`
- ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `log_history`
 --
 ALTER TABLE `log_history`
- ADD PRIMARY KEY (`log_Id`);
+  ADD PRIMARY KEY (`log_Id`);
 
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
- ADD PRIMARY KEY (`prod_Id`);
+  ADD PRIMARY KEY (`prod_Id`);
 
 --
 -- Indexes for table `reservation`
 --
 ALTER TABLE `reservation`
- ADD PRIMARY KEY (`reserve_Id`);
+  ADD PRIMARY KEY (`reserve_Id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`user_Id`);
+  ADD PRIMARY KEY (`user_Id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -408,42 +415,51 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-MODIFY `actId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+  MODIFY `actId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-MODIFY `cat_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `cat_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-MODIFY `cust_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=86;
+  MODIFY `cust_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+
 --
 -- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `log_history`
 --
 ALTER TABLE `log_history`
-MODIFY `log_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
+  MODIFY `log_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-MODIFY `prod_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+  MODIFY `prod_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-MODIFY `reserve_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `reserve_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `user_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=84;
+  MODIFY `user_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

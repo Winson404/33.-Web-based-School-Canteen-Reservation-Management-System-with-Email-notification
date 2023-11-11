@@ -37,7 +37,7 @@ if (isset($_POST['update_customer'])) {
 		if ($customer->update_check_email_exists($cust_Id, $email)) {
         displayErrorMessage("Email already exists!", '../Admin/customer_mgmt.php?page='.$cust_Id);
     	} else {
-			$result = $customer->update_customer($cust_Id, $user_type, $yr_section, $teacherPosition, $firstname, $middlename, $lastname, $suffix, $dob, $age, $gender, $civilstatus, $email, $contact, $address);
+			$result = $customer->update_customer($cust_Id, $user_type, $yr_section, $teacherPosition, $firstname, $middlename, $lastname, $suffix, $dob, $age, $gender, $civilstatus, $email, $contact, $address, $fileToUpload);
 		    // var_dump($result);
 		    if($result) {
 		    	displayUpdateMessage($result, "Customer record has been updated.", '../Admin/customer_mgmt.php?page='.$cust_Id);

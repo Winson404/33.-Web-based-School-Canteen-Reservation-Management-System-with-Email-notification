@@ -2,7 +2,7 @@
 
 require_once 'sidebar.php';
 
-$connection = mysqli_connect("localhost","root","","my_template");
+$connection = mysqli_connect("localhost","root","","reservation");
 $tables = array();
 $result = mysqli_query($connection,"SHOW TABLES");
 while($row = mysqli_fetch_row($result)){

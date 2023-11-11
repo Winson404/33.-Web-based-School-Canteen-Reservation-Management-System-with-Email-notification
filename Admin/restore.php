@@ -1,7 +1,7 @@
 <?php 
 require_once 'sidebar.php';
 
-$connection = mysqli_connect("localhost","root","","my_template");
+$connection = mysqli_connect("localhost","root","","reservation");
 $filename = date("Y-m-d").".sql";
 $handle = fopen($filename,"r+");
 $contents = fread($handle,filesize($filename));

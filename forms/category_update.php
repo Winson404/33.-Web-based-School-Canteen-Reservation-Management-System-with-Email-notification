@@ -16,9 +16,9 @@ if (isset($_POST['update_category'])) {
         $result = $category->update_category($cat_Id, $catName, $description);
         // var_dump($result);
         if($result) {
-            displayUpdateMessage($result, "Category has been updated.", '../Admin/category.php');
+            displayUpdateMessage($result, "Category has been updated.", '../Admin/category.php?cat_Id='.$cat_Id);
         } else {
-            displayErrorMessage("Something went wrong while saving the information.", '../Admin/category.php'); 
+            displayErrorMessage("Something went wrong while saving the information.", '../Admin/category.php?cat_Id='.$cat_Id); 
         }
     }
 }

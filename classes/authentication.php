@@ -38,7 +38,7 @@ class UserAuthentication {
 
                 $log_ID = $row2['cust_Id'];
                 $login_time = date("Y-m-d h:i A");
-                $login = mysqli_query($this->conn, "INSERT INTO log_history (cust_Id, login_time) VALUES ('$log_ID', '$login_time')");
+                $login = mysqli_query($this->conn, "INSERT INTO log_history (user_Id, login_time) VALUES ('$log_ID', '$login_time')");
                 $this->resetLoginAttempts();
                 $this->startSession('user_Id', $row2['cust_Id'], $login_time);
                 header("Location: ../User/index.php");
