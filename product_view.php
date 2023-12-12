@@ -35,7 +35,7 @@
               <small>Date added: <?= date("F d, Y h:i:s A", strtotime($row['date_added'])) ?></small>
             </div>
             <div class="mt-4">
-              <a href="login.php">
+              <a href="guest_form.php?prod_Id=<?php echo $row['prod_Id']; ?>">
                 <div class="btn btn-primary btn-lg btn-flat">
                   <i class="fas fa-cart-plus fa-lg mr-2"></i>
                   Reserve

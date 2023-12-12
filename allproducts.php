@@ -60,7 +60,7 @@
                           </div>
                         </a>
                         <div class="card-footer">
-                          <a href="login.php" class="btn btn-info btn-sm"><i class="fas fa-cart-plus fa-lg"></i> Reserve</a>
+                          <a href="guest_form.php?prod_Id=<?php echo $row['prod_Id']; ?>" class="btn btn-info btn-sm"><i class="fas fa-cart-plus fa-lg"></i> Reserve</a>
                         </div>
                       </div>
                   </div>
@@ -103,7 +103,7 @@
                           </div>
                         </a>
                         <div class="card-footer">
-                          <a href="login.php" class="btn btn-info btn-sm"><i class="fas fa-cart-plus fa-lg"></i> Reserve</a>
+                          <a href="guest_form.php?prod_Id=<?php echo $row['prod_Id']; ?>" class="btn btn-info btn-sm"><i class="fas fa-cart-plus fa-lg"></i> Reserve</a>
                         </div>
                       </div>
                   </div>

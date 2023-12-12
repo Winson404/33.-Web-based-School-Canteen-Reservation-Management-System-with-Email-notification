@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2023 at 02:57 PM
+-- Generation Time: Dec 12, 2023 at 12:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -117,6 +117,36 @@ INSERT INTO `customer` (`cust_Id`, `user_type`, `yr_section`, `teacherPosition`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `guest_reservation`
+--
+
+CREATE TABLE `guest_reservation` (
+  `guest_Id` int(11) NOT NULL,
+  `prod_Id` int(11) NOT NULL,
+  `prod_qty` int(11) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `middlename` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `suffix` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `contact` varchar(100) NOT NULL,
+  `address` text NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=Pending, 1=Approved, 2=Delivered, 3=Unavailable ',
+  `date_reserved` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `guest_reservation`
+--
+
+INSERT INTO `guest_reservation` (`guest_Id`, `prod_Id`, `prod_qty`, `firstname`, `middlename`, `lastname`, `suffix`, `email`, `contact`, `address`, `status`, `date_reserved`) VALUES
+(1, 6, 5, 'Guest', 'Guest', 'GuestGuest', 'v', 'sonerGuestwin1Guest2@gmail.com', '9359428963', 'MedellinGuestGuest', 2, '2023-12-11 23:50:14'),
+(2, 6, 53, 'guestreservation', 'guestreservation', 'guestreservation', 'guest_reservation', 'sonerguest_reservationwin12@gmail.com', '9359428963', 'guest_reservation', 2, '2023-11-07 23:50:53'),
+(3, 6, 43, 'Dasd', 'Sadsad', 'Adsadas', 'Password', 'Sonerwidsa432n12@gmail.com', '9269228230', 'Medellindsadsa', 2, '2023-12-12 23:52:47');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `income`
 --
 
@@ -131,15 +161,10 @@ CREATE TABLE `income` (
 --
 
 INSERT INTO `income` (`Id`, `reserve_Id`, `date_added`) VALUES
-(1, 15, '2023-10-28 01:39:31'),
-(2, 16, '2023-10-28 01:40:06'),
-(3, 11, '2023-10-28 13:49:04'),
-(4, 24, '2023-10-28 13:49:45'),
-(5, 11, '2023-10-28 13:50:30'),
-(6, 32, '2023-11-05 12:45:39'),
-(7, 1, '2023-11-06 21:07:59'),
-(8, 2, '2023-11-06 21:10:38'),
-(9, 3, '2023-11-11 10:39:07');
+(12, 2, '2023-12-12 01:18:38'),
+(13, 3, '2023-12-12 01:45:19'),
+(14, 1, '2023-12-12 01:45:32'),
+(15, 2, '2023-12-12 01:45:39');
 
 -- --------------------------------------------------------
 
@@ -221,7 +246,17 @@ INSERT INTO `log_history` (`log_Id`, `user_Id`, `login_time`, `logout_time`) VAL
 (60, 66, '2023-11-10 04:42 PM', ''),
 (61, 73, '2023-11-11 10:27 AM', ''),
 (62, 85, '2023-11-11 10:38 AM', ''),
-(63, 66, '2023-11-11 10:38 AM', '');
+(63, 66, '2023-11-11 10:38 AM', ''),
+(64, 66, '2023-11-19 09:07 AM', ''),
+(65, 66, '2023-11-20 09:31 AM', ''),
+(66, 73, '2023-11-20 09:32 AM', ''),
+(67, 85, '2023-11-20 09:33 AM', ''),
+(68, 66, '2023-11-20 09:35 AM', ''),
+(69, 66, '2023-11-20 09:41 AM', ''),
+(70, 85, '2023-11-20 09:41 AM', ''),
+(71, 85, '2023-12-12 12:08 AM', ''),
+(72, 66, '2023-12-12 12:09 AM', ''),
+(73, 66, '2023-12-12 12:42 AM', '');
 
 -- --------------------------------------------------------
 
@@ -304,7 +339,7 @@ CREATE TABLE `reservation` (
 INSERT INTO `reservation` (`reserve_Id`, `cust_Id`, `prod_Id`, `qty`, `status`, `date_reserved`) VALUES
 (1, 85, 2, 2, 1, '2023-11-06 21:06:15'),
 (2, 85, 1, 3, 1, '2023-11-06 21:06:18'),
-(3, 85, 6, 1, 2, '2023-11-11 10:38:35'),
+(3, 85, 6, 2, 2, '2023-11-11 10:38:35'),
 (4, 85, 7, 2, 0, '2023-11-11 10:38:39');
 
 -- --------------------------------------------------------
@@ -378,6 +413,12 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`cust_Id`);
 
 --
+-- Indexes for table `guest_reservation`
+--
+ALTER TABLE `guest_reservation`
+  ADD PRIMARY KEY (`guest_Id`);
+
+--
 -- Indexes for table `income`
 --
 ALTER TABLE `income`
@@ -430,16 +471,22 @@ ALTER TABLE `customer`
   MODIFY `cust_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
+-- AUTO_INCREMENT for table `guest_reservation`
+--
+ALTER TABLE `guest_reservation`
+  MODIFY `guest_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `log_history`
 --
 ALTER TABLE `log_history`
-  MODIFY `log_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `log_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `product`

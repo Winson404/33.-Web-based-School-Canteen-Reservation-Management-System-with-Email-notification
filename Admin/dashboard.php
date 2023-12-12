@@ -6,6 +6,7 @@
   require '../classes/category.php';
   require '../classes/product.php';
   require '../classes/reservation.php';
+  require '../classes/guest.php';
 ?>
 <div class="content-wrapper">
   <div class="content-header">
@@ -43,12 +44,12 @@
             <a href="admin.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div class="col-lg-3 col-6">
+       <!--  <div class="col-lg-3 col-6">
           <div class="small-box bg-success">
             <div class="inner">
               <?php
-                $user = new User();
-                $count_user = $user->count_users('User');
+               // $user = new User();
+               // $count_user = $user->count_users('User');
               ?>
               <h3><?= $count_user; ?></h3>
               <p>Registered users</p>
@@ -56,11 +57,11 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="users.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="admin.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
-        </div>
+        </div> -->
         <div class="col-lg-3 col-6">
-          <div class="small-box bg-danger">
+          <div class="small-box bg-success">
             <div class="inner">
               <?php
                 $student = new Customer();
@@ -76,7 +77,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-6">
-          <div class="small-box bg-warning">
+          <div class="small-box bg-danger">
             <div class="inner">
               <?php
                 $teacher = new Customer();
@@ -92,7 +93,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-6">
-          <div class="small-box bg-info">
+          <div class="small-box bg-warning">
             <div class="inner">
               <?php
                 $cat = new Category();
@@ -108,7 +109,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-6">
-          <div class="small-box bg-success">
+          <div class="small-box bg-info">
             <div class="inner">
               <?php
                 $prod = new Product();
@@ -124,7 +125,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-6">
-          <div class="small-box bg-danger">
+          <div class="small-box bg-success">
             <div class="inner">
               <?php
                 $reserve = new Reservation();
@@ -137,6 +138,22 @@
               <i class="fas fa-calendar-check"></i>
             </div>
             <a href="reservation.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <?php
+                $guest_reserve = new GuestReservation();
+                $guest_count_reserve = $guest_reserve->guest_count_reserve();
+              ?>
+              <h3><?= $guest_count_reserve; ?></h3>
+              <p>Guest reservations</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <a href="reservation_guest.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         

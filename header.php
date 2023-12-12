@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
     <style>
     body {
-    font-family: 'Roboto', sans-serif;
+      font-family: 'Roboto', sans-serif;
     }
     /*.form-control:not([type="email"]):not([type="password"]) {
     text-transform: capitalize;
@@ -48,17 +48,17 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a href="allproducts.php" class="nav-link">All products</a>
+                <a href="allproducts.php" class="nav-link" style="font-weight: normal;">Menu</a>
               </li>
               <li class="nav-item dropdown ">
-                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Categories</a>
+                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle" style="font-weight: normal;">Categories</a>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                   <?php 
                     $cat = new Category();
                     $category = $cat->display_category();
                     if($category->num_rows > 0) {
                       while($row2 = $category->fetch_assoc()) { ?>
-                       <li><a href="category.php?cat_Id=<?php echo $row2['cat_Id']; ?>" class="dropdown-item"><?php echo $row2['catName']; ?></a></li>
+                       <li><a href="category.php?cat_Id=<?php echo $row2['cat_Id']; ?>" class="dropdown-item" style="font-weight: normal;"><?php echo $row2['catName']; ?></a></li>
 
                   <?php    }
                     } else { ?>
@@ -90,7 +90,7 @@
               $current_page = basename($_SERVER['PHP_SELF']);
               if ($current_page !== 'login.php') { ?>
                 <li class="nav-item">
-                    <a href="login.php" class="nav-link">Login</a>
+                    <a href="login.php" class="nav-link" style="font-weight: normal;">Login</a>
                 </li>
             <?php } ?>
             <li class="nav-item">

@@ -74,9 +74,10 @@
           <li class="nav-item d-none d-sm-inline-block">
             <a href="dashboard.php" class="nav-link">Home</a>
           </li>
-          <!-- <li class="nav-item d-none d-sm-inline-block">
-            <a href="contact-us.php" class="nav-link">Contact</a>
-          </li> -->
+          <li class="nav-item d-none d-sm-inline-block">
+            <!-- <a href="contact-us.php" class="nav-link">Contact</a> -->
+            <a href="#" class="nav-link text-primary" id="realTimeClock"></a>
+          </li>
         </ul>
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">

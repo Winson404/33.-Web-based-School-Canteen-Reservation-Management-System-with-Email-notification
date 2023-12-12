@@ -1,12 +1,31 @@
 <title>Web-based School Canteen Reservation Management System | Login</title>
 <?php require_once 'header.php'; ?>
-<div class="content m-5">
+<style>
+  .content {
+    background-image: url('assets/images/loginbg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    position: relative;
+  }
+  .content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the last value (0.5) for opacity */
+  }
+</style>
+  <div class="content">
   <div class="login-box d-block m-auto">
     <div class="card card-outline card-primary ">
       <div class="card-header text-center">
         <!-- <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a> -->
         <a href="login.php" class="h1">
-          <img src="assets/images/ctu-logo copy.jpg" alt="logo" class="img-fluid shadow-sm img-circle">
+          <img src="assets/images/ctu-logo copy.jpg" alt="logo" class="shadow-sm img-circle" width="150">
         </a>
       </div>
       <div class="card-body">

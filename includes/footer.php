@@ -327,6 +327,41 @@
     }
   });
 </script>
+<script>
+function updateClock() {
+    // Get the current date and time in JavaScript
+    var now = new Date();
 
+    // Format the date in the desired PHP format
+    var formattedDate = now.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+    });
+
+    // Get the current time in hours, minutes, and seconds
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+
+    // Determine AM or PM
+    var amOrPm = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert 24-hour time to 12-hour time
+    hours = hours % 12 || 12;
+
+    // Format the time with leading zeros if needed
+    var formattedTime = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds + ' ' + amOrPm;
+
+    // Display the formatted date and time
+    document.getElementById('realTimeClock').innerHTML = formattedDate + ' ' + formattedTime;
+
+    // Update the clock every second
+    setTimeout(updateClock, 1000);
+}
+
+// Initial call to start the clock
+updateClock();
+</script>
 </body>
 </html>

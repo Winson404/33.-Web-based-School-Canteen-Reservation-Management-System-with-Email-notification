@@ -95,10 +95,10 @@
 		    $conn = $this->db->getConnection();
 		    $currentDate = date('Y-m-d');
 		    
-		    $query = "SELECT * FROM reservation";
+		    $query = "SELECT * FROM reservation JOIN product ON reservation.prod_Id=product.prod_Id JOIN category oN product.cat_Id=category.cat_Id JOIN customer ON reservation.cust_Id=customer.cust_Id";
 		    $result = $conn->query($query);
 		    
-		    $announcements = $result->fetch_all(MYSQLI_ASSOC);
+		    // $announcements = $result->fetch_all(MYSQLI_ASSOC);
 		    
 		    // Count the number of records
 		    $count = $result->num_rows;
@@ -141,101 +141,113 @@
 		public function getDailyIncome($date) {
 		    $conn = $this->db->getConnection();
 
-		    // SQL query to calculate the daily income
-    		$query = "SELECT IFNULL(SUM(product.price * reservation.qty), 0) AS total_income
-              FROM product
-              LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id AND DATE(reservation.date_reserved) = ? WHERE reservation.status=2";
-		    
+		    // SQL query to calculate the daily income using LEFT JOIN for reservations and guest reservations
+		    $query = "SELECT IFNULL(SUM(product.price * reservation.qty), 0) AS total_income FROM product LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id AND DATE(reservation.date_reserved) = ? WHERE reservation.status = 2";
+
+		    $query2 = "SELECT IFNULL(SUM(product.price * guest_reservation.prod_qty), 0) AS total_income FROM product LEFT JOIN guest_reservation ON product.prod_Id = guest_reservation.prod_Id AND DATE(guest_reservation.date_reserved) = ? WHERE guest_reservation.status = 2";
+
 		    $stmt = $conn->prepare($query);
 		    $stmt->bind_param("s", $date);
 
-		    if (!$stmt) {
-		        die('Error in SQL query: ' . $conn->error);
-		    }
-
 		    $stmt->execute();
 
-		    if ($stmt->error) {
-		        die('Query execution error: ' . $stmt->error);
+		    $result = $stmt->get_result(); // Fetch the result before executing the next query
+
+		    $stmt2 = $conn->prepare($query2);
+		    $stmt2->bind_param("s", $date);
+
+		    $stmt2->execute();
+
+		    $result2 = $stmt2->get_result(); // Fetch the result before returning from the function
+
+		    if ($stmt->error || $stmt2->error) {
+		        die('Query execution error: ' . $stmt->error . ' ' . $stmt2->error);
 		    }
 
-		    $result = $stmt->get_result();
+		    $row = $result->fetch_assoc();
+		    $row2 = $result2->fetch_assoc();
 
-		    if ($result) {
-		        $row = $result->fetch_assoc();
-		        return $row['total_income'];
-		    } else {
-		        die('No result returned from the query.');
-		    }
+		    return $row['total_income'] + $row2['total_income'];
 		}
+
 
 
 		// ADMIN/INCOME_REPORT.PHP
 		public function getMonthlyIncome($year, $month) {
 		    $conn = $this->db->getConnection();
 
-		    // SQL query to calculate the monthly income for a specific year and month
+		    // SQL query to calculate the monthly income for reservations
 		    $query = "SELECT IFNULL(SUM(product.price * reservation.qty), 0) AS total_income
 		              FROM product
 		              LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id
-		              WHERE DATE_FORMAT(reservation.date_reserved, '%Y-%m') = ?  AND reservation.status=2";
+		              WHERE DATE_FORMAT(reservation.date_reserved, '%Y-%m') = ? AND reservation.status = 2";
+
+		    // SQL query to calculate the monthly income for guest reservations
+		    $query2 = "SELECT IFNULL(SUM(product.price * guest_reservation.prod_qty), 0) AS total_income
+		               FROM product
+		               LEFT JOIN guest_reservation ON product.prod_Id = guest_reservation.prod_Id
+		               WHERE DATE_FORMAT(guest_reservation.date_reserved, '%Y-%m') = ? AND guest_reservation.status = 2";
 
 		    $targetMonth = sprintf("%04d-%02d", $year, $month); // Format the year and month
 
 		    $stmt = $conn->prepare($query);
 		    $stmt->bind_param("s", $targetMonth);
 
-		    if (!$stmt) {
+		    $stmt2 = $conn->prepare($query2);
+		    $stmt2->bind_param("s", $targetMonth);
+
+		    if (!$stmt || !$stmt2) {
 		        die('Error in SQL query: ' . $conn->error);
 		    }
 
 		    $stmt->execute();
-
-		    if ($stmt->error) {
-		        die('Query execution error: ' . $stmt->error);
-		    }
-
 		    $result = $stmt->get_result();
+		    $row = $result->fetch_assoc();
+		    $stmt->close(); // Close the first statement after fetching the result
 
-		    if ($result) {
-		        $row = $result->fetch_assoc();
-		        return $row['total_income'];
-		    } else {
-		        die('No result returned from the query.');
-		    }
+		    $stmt2->execute();
+		    $result2 = $stmt2->get_result();
+		    $row2 = $result2->fetch_assoc();
+		    $stmt2->close(); // Close the second statement after fetching the result
+
+		    return $row['total_income'] + $row2['total_income'];
 		}
+
 
 		// ADMIN/INCOME_REPORT.PHP
 		public function getTotalIncome() {
-		    $conn = $this->db->getConnection();
+    $conn = $this->db->getConnection();
 
-		    // SQL query to calculate the monthly income for a specific year and month
-		    $query = "SELECT IFNULL(SUM(product.price * reservation.qty), 0) AS total_income
-		              FROM product
-		              LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id  WHERE reservation.status=2";
+    // SQL query to calculate the total income for both reservations and guest reservations
+    $query = "SELECT IFNULL(SUM(price * qty), 0) AS total_income
+              FROM (
+                  SELECT product.price, reservation.qty
+                  FROM product
+                  LEFT JOIN reservation ON product.prod_Id = reservation.prod_Id
+                  WHERE reservation.status = 2
+
+                  UNION ALL
+
+                  SELECT product.price, guest_reservation.prod_qty AS qty
+                  FROM product
+                  LEFT JOIN guest_reservation ON product.prod_Id = guest_reservation.prod_Id
+                  WHERE guest_reservation.status = 2
+              ) AS combined";
+
+    $result = $conn->query($query);
+
+    if ($result === false) {
+        die('Error in SQL query: ' . $conn->error);
+    }
+
+    $row = $result->fetch_assoc();
+
+    $result->free(); // Free up the result set
+
+    return $row['total_income'];
+}
 
 
-		    $stmt = $conn->prepare($query);
-
-		    if (!$stmt) {
-		        die('Error in SQL query: ' . $conn->error);
-		    }
-
-		    $stmt->execute();
-
-		    if ($stmt->error) {
-		        die('Query execution error: ' . $stmt->error);
-		    }
-
-		    $result = $stmt->get_result();
-
-		    if ($result) {
-		        $row = $result->fetch_assoc();
-		        return $row['total_income'];
-		    } else {
-		        die('No result returned from the query.');
-		    }
-		}
 
 
 

@@ -113,11 +113,39 @@ if ($userSession->isUserLoggedIn()) {
           </a>
         </li>
         <li class="nav-item">
-          <a href="reservation.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'reservation.php') ? 'active' : ''; ?>">
+          <a href="#" class="nav-link
+            <?php
+            echo (
+            basename($_SERVER['PHP_SELF']) == 'reservation.php' ||
+            basename($_SERVER['PHP_SELF']) == 'reservation_guest.php'
+            ) ? 'active' : '';
+            ?>
+            ">
             <i class="fas fa-calendar-check"></i>
-            <p>&nbsp;&nbsp; Reservations</p>
+            <p>&nbsp;&nbsp;Reservations<i class="right fas fa-angle-left"></i></p>
           </a>
-        </li>
+          <ul class="nav nav-treeview"
+            <?php
+            echo (
+            basename($_SERVER['PHP_SELF']) == 'reservation.php' ||
+            basename($_SERVER['PHP_SELF']) == 'reservation_guest.php'
+            ) ? 'style="display: block;"' : '';
+            ?>
+            >
+            <li class="nav-item">
+              <a href="reservation.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'reservation.php') ? 'active' : ''; ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>&nbsp;&nbsp; Reservations</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="reservation_guest.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'reservation_guest.php') ? 'active' : ''; ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>&nbsp;&nbsp; Guest Reservations</p>
+              </a>
+            </li>
+          </ul>
+        </li>     
         <li class="nav-header text-secondary" style="margin-bottom: -10px;">REPORTS</li>
         <li class="nav-item">
           <a href="income_report.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'income_report.php') ? 'active' : ''; ?>">

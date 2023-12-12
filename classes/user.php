@@ -138,7 +138,7 @@
 	    public function count_users($user_type) {
 		    $conn = $this->db->getConnection();
 		    if($user_type == 'Admin') {
-		    	$query = "SELECT * FROM users WHERE (user_type='Admin' || user_type='Staff')";
+		    	$query = "SELECT * FROM users WHERE user_type != 'User' ";
 		    } else {
 		    	$query = "SELECT * FROM users WHERE user_type='User' ";
 		    }
