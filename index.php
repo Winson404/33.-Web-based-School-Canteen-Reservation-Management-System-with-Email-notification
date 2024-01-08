@@ -15,6 +15,29 @@
   require_once 'classes/product.php';
   ?>
   <style>
+    .hero {
+      background-image: url('assets/images/newnewbg - Copy.jpg');
+      background-size: cover;
+/*      background-position: center;*/
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust the last value (0.5) for opacity */
+    }
+
     .cover-image {
       background-image: url('assets/images/canteen.jpg');
       background-size: cover;
@@ -48,12 +71,13 @@
   </style>
 </head>
 <body>
-  <section id="hero" class="hero d-flex align-items-center section-bg" style="margin-top: -110px;">
+
+ <section id="hero" class="hero d-flex align-items-center section-bg" style="margin-top: -110px;">
     <div class="container">
       <div class="row justify-content-between gy-5">
-        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-         <h2 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food</h2>
-         <p data-aos="fade-up" data-aos-delay="100">Experience the delight of savoring nutritious and delicious meals. Indulge in the pleasure of flavors that follow, creating a memorable dining experience. Discover a menu that seeks the finest and satisfies your culinary desires.</p>
+        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start ">
+         <h2 data-aos="fade-up" class=" text-white">Enjoy Your Healthy<br>Delicious Food</h2>
+         <p data-aos="fade-up" data-aos-delay="100" class=" text-white">Experience the delight of savoring nutritious and delicious meals. Indulge in the pleasure of flavors that follow, creating a memorable dining experience. Discover a menu that seeks the finest and satisfies your culinary desires.</p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
             <a href="allproducts.php" class="btn-book-a-table">Reserve No</a>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
@@ -65,6 +89,25 @@
       </div>
     </div>
   </section>
+
+  <!-- <section id="hero" class="hero d-flex align-items-center section-bg" style="margin-top: -110px;">
+    <div class="container">
+      <div class="row justify-content-between gy-5">
+        <div class="col-lg-12 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start ">
+          <h1>Web-based School Canteen Reservation Management System</h1>
+          <h2 data-aos="fade-up" class=" text-white">Enjoy Your Healthy<br>Delicious Food</h2>
+         <p data-aos="fade-up" data-aos-delay="100" class=" text-white">Experience the delight of savoring nutritious and delicious meals. Indulge in the pleasure of flavors that follow, creating a memorable dining experience. Discover a menu that seeks the finest and satisfies your culinary desires.</p>
+          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+            <a href="allproducts.php" class="btn-book-a-table">Reserve No</a>
+            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+          </div>
+        </div>
+        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+          <img src="assets/images/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+        </div>
+      </div>
+    </div>
+  </section> -->
 
   <!-- ======= About Section ======= -->
     <section id="about" class="about">

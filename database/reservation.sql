@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 12:25 PM
+-- Generation Time: Dec 13, 2023 at 07:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -256,7 +256,8 @@ INSERT INTO `log_history` (`log_Id`, `user_Id`, `login_time`, `logout_time`) VAL
 (70, 85, '2023-11-20 09:41 AM', ''),
 (71, 85, '2023-12-12 12:08 AM', ''),
 (72, 66, '2023-12-12 12:09 AM', ''),
-(73, 66, '2023-12-12 12:42 AM', '');
+(73, 66, '2023-12-12 12:42 AM', ''),
+(74, 66, '2023-12-12 07:36 PM', '');
 
 -- --------------------------------------------------------
 
@@ -486,7 +487,7 @@ ALTER TABLE `income`
 -- AUTO_INCREMENT for table `log_history`
 --
 ALTER TABLE `log_history`
-  MODIFY `log_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `log_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `product`
